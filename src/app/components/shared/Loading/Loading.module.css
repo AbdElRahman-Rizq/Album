@@ -1,0 +1,40 @@
+.spinner {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  margin: 0 auto;
+  animation: loading 2s linear infinite;
+}
+
+.bubble1,
+.bubble2 {
+  position: absolute;
+  top: 0;
+  width: 16px;
+  height: 16px;
+  border-radius: 100%;
+  background-color: white;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+.bubble2 {
+  top: auto;
+  bottom: 0;
+  animation-delay: -1s;
+}
+
+@keyframes loading {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1);
+  }
+}

@@ -1,0 +1,39 @@
+.backdrop {
+  width: 100vw;
+  height: 100vh !important;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 100000;
+  
+}
+
+.overlay {
+  background-color: white;
+  z-index: 100001;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  width: fit-content;
+  border-radius: 20px;
+}
+
+.closeButton {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+    color: var(--second-color);
+    cursor: pointer;
+    font-size: 25px;
+    transition: color 0.3s ease-in-out;
+}
+
+.closeButton:hover {
+  color: var(--main-color);
+}
