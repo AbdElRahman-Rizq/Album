@@ -46,7 +46,7 @@ export default async function RootLayout({ children }) {
     <html lang="en">
       <GoogleTagManager gtmId="GTM-5LN8P47B" />
       <head>
-        <title>{</title>
+        <title>Album Travel</title>
         <meta name="description" content="Discover amazing travel blogs and adventures" />
         <meta charSet="utf-8" />
         <link rel="icon" href="/images/favicon.ico" />
