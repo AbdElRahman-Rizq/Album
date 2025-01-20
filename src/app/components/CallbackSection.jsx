@@ -1,11 +1,11 @@
-'use client'
+"use client";
 import { useState, useRef } from "react";
-import Image from 'next/image'
-import Link from 'next/link'
+import Image from "next/image";
+import Link from "next/link";
 import CountUp from "react-countup";
 import { useInView } from "react-intersection-observer";
-import { useHomeBlog } from "@/home/HomeBlogProvider";
-import { BsFillPlayFill } from 'react-icons/bs';
+
+import { BsFillPlayFill } from "react-icons/bs";
 
 import img8 from "@/assets/images/img8.jpg";
 import icon1 from "@/assets/images/icon1.png";
@@ -14,6 +14,7 @@ import icon3 from "@/assets/images/icon3.png";
 import icon4 from "@/assets/images/icon4.png";
 import icon5 from "@/assets/images/icon5.png";
 import { api_url } from "@/constants/base_url";
+import { useHomeBlog } from "@/providers/HomeBlogContext";
 
 const CounterItem = ({ iconSrc, counter, text }) => {
   const { ref, inView } = useInView({
@@ -127,17 +128,24 @@ const Modal = ({ show, handleClose, videoSrc }) => {
       <section className="modal-main">
         <button
           onClick={handleClose}
-          className="close-button p-3"
+          className="modal-video-close-btn p-3"
           aria-label="Close modal"
         >
           X
         </button>
-        <div style={{ width: '100%', height: '100%', maxHeight: '80vh', position: 'relative' }}>
+        <div
+          style={{
+            width: "100%",
+            height: "100%",
+            maxHeight: "80vh",
+            position: "relative",
+          }}
+        >
           <video
             ref={videoRef}
             controls
             autoPlay
-            style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+            style={{ width: "100%", height: "100%", objectFit: "contain" }}
           >
             <source src={videoSrc} type="video/mp4" />
             Your browser does not support the video tag.
@@ -169,10 +177,18 @@ const CallbackImg = ({ backgroundImage }) => {
             onClick={() => handleShow("IUN664s7N-c")}
           >
             {/* <i className="fas fa-play"></i> */}
-            <BsFillPlayFill size={5} className="  icon-play" style={{ fontSize: '5px' }} />
+            <BsFillPlayFill
+              size={5}
+              className="icon-play"
+              style={{ fontSize: "5px" }}
+            />
           </a>
         </div>
-        <Modal show={showModal} handleClose={handleClose} videoSrc={"./images/Sequence.mp4"} />
+        <Modal
+          show={showModal}
+          handleClose={handleClose}
+          videoSrc={"./images/Sequence.mp4"}
+        />
       </div>
     </>
   );
@@ -182,7 +198,10 @@ const CallbackSection = ({ icons, defaultImg }) => {
   const { blog } = useHomeBlog();
 
   const backgroundImage = blog?.sub_card_4?.image?.[0]
-    ? `${api_url}${blog?.sub_card_4?.image[0]}`.slice(0, -4)
+    ? `${api_url}${blog?.sub_card_4?.image[0]}`.replace(
+      "/api/",
+      "/storage/"
+    )
     : defaultImg?.src || img8.src;
 
   return (

@@ -3,17 +3,22 @@ import { useQuery } from '@tanstack/react-query'
 import SectionHeading from './SectionHeading'
 import SpecialRow from './special/SpecialRow'
 import axios from 'axios'
-import { useHomeBlog } from "@/home/HomeBlogProvider";
+
 import { api_url } from '@/constants/base_url'
+import { getTokenFromCookies } from '../../utils/cookieUtils'
+import { useHomeBlog } from '@/providers/HomeBlogContext'
+
 
 const SpecialTravelOffer = () => {
     const { blog } = useHomeBlog();
+    console.log("blogFromSpecial: ", blog);
+
     const { data } = useQuery({
         queryKey: ["specialOffers"],
         queryFn: () => axios.get(`${api_url}tour?HasOffer=1`, {
             headers: {
                 "Content-Type": "application/json",
-                Authorization: `Bearer ${localStorage.getItem("accessToken")}`
+                Authorization: `Bearer ${getTokenFromCookies()}`
             }
         })
     })

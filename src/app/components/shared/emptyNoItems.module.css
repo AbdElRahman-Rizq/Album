@@ -1,0 +1,20 @@
+.Empty {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    text-align: center;
+    color: var(--text-color-light);
+}
+
+.Empty svg {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    color: var(--second-color);
+}
+
+.Empty p {
+    font-size: 1rem;
+    color: var(--text-color-light);
+}

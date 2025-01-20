@@ -1,13 +1,14 @@
-"use client";
-import withAuth from "../hoc/withAuth";
 
-const AdminLayout = ({ children }) => {
-  return (
-    <div>
-      <h1>Admin Layout</h1>
-      <div>{children}</div>
-    </div>
-  );
+export const metadata = {
+  title: "Admin Dashboard",
+  description: "Admin panel for managing content.",
 };
 
-export default withAuth(AdminLayout);
+export default function AdminLayout({ children }) {
+  return (
+    <div>
+      <h1>Admin Dashboard</h1>
+      <main>{children}</main>
+    </div>
+  );
+}

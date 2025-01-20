@@ -1,8 +1,10 @@
-'use client'
-import Image from 'next/image'
-import Slider from "react-slick"
-import { useHomeBlog } from "@/home/HomeBlogProvider";
-import { api_url } from '@/constants/base_url';
+"use client";
+import Image from "next/image";
+import Slider from "react-slick";
+import { api_url } from "@/constants/base_url";
+
+import img23 from "@/assets/images/img23.jpg";
+import { useHomeBlog } from "@/providers/HomeBlogContext";
 
 const TestimonialItem = ({ imgSrc, quote, name, company }) => (
   <div className="testimonial-item text-center">
@@ -19,8 +21,8 @@ const TestimonialItem = ({ imgSrc, quote, name, company }) => (
   </div>
 );
 
-const TestimonialSection = ({ backgroundImage }) => {
-  const { blog } = useHomeBlog()
+const TestimonialSection = () => {
+  const { blog } = useHomeBlog();
 
   const settings = {
     dots: true,
@@ -34,7 +36,7 @@ const TestimonialSection = ({ backgroundImage }) => {
   return (
     <div
       className="testimonial-section"
-      style={{ backgroundImage: `url(${backgroundImage})` }}
+      style={{ backgroundImage: `url(${img23})` }}
     >
       <div className="container-fluid">
         <div className="row my-4">
@@ -46,7 +48,10 @@ const TestimonialSection = ({ backgroundImage }) => {
               {blog?.sub_card_9?.content?.split("-.-")?.map((item, index) => (
                 <TestimonialItem
                   key={index}
-                  imgSrc={`${api_url}${blog?.sub_card_9?.image?.[index]}`.slice(0, -4)}
+                  imgSrc={`${api_url}${blog?.sub_card_9?.image?.[index]}`.replace(
+                    "/api/",
+                    "/storage/"
+                  )}
                   quote={item.split("@.@")?.[0]}
                   name={item.split("@.@")?.[1]}
                   company={item.split("@.@")?.[2]}

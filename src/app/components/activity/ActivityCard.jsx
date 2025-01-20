@@ -1,6 +1,6 @@
-'use client'
-import Image from 'next/image'
-import Link from 'next/link'
+"use client";
+import Image from "next/image";
+import Link from "next/link";
 
 const ActivityCard = ({ imgSrc, title, destinationNum }) => {
   return (
@@ -8,13 +8,15 @@ const ActivityCard = ({ imgSrc, title, destinationNum }) => {
       <div className="activity-item">
         <div className="activity-icon">
           <Link href="#">
-            <div style={{ position: 'relative', width: '60px', height: '60px' }}>
+            <div
+              style={{ position: "relative", width: "60px", height: "60px" }}
+            >
               <Image
                 src={imgSrc}
                 alt={title}
                 fill
                 sizes="60px"
-                style={{ objectFit: 'contain' }}
+                style={{ objectFit: "cover" }}
               />
             </div>
           </Link>
@@ -27,7 +29,7 @@ const ActivityCard = ({ imgSrc, title, destinationNum }) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ActivityCard
+export default ActivityCard;

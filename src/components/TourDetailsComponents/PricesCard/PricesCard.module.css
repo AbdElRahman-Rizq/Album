@@ -1,0 +1,122 @@
+.priceCard {
+  border: 1px solid var(--first-gray-font-color);
+  border-radius: 20px;
+  overflow: hidden;
+}
+.priceCard h3,
+.priceCard h4,
+.priceCard h5,
+.priceCard p {
+  margin: 0;
+  padding: 0;
+}
+
+.priceCard h3 {
+  text-align: center;
+  background-color: var(--main-color);
+  color: white;
+  padding: 15px;
+}
+.priceCard h4 {
+  margin-bottom: 10px;
+}
+
+.priceCard > div {
+  padding: 20px;
+  display: grid;
+  height: 100%;
+}
+
+.pricesSection {
+  margin-bottom: 20px;
+}
+
+/* start iterationsSection style */
+.iterationsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.iterationsSection h5 {
+  text-transform: uppercase;
+  font-weight: bold;
+  color: var(--second-color);
+  margin-bottom: 5px;
+}
+.iterationsSection .detailsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.iterationsSection .detailsCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid var(--first-gray-font-color);
+  padding: 10px 10px;
+}
+.iterationsSection .detailsCard > p:last-child {
+  color: var(--main-color);
+  font-weight: bold;
+}
+/* end iterationsSection style */
+
+.hotelsSection {
+  align-self: flex-end;
+  margin-bottom: 60px;
+  margin-top: -50px;
+}
+.hotelCard {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+}
+.hotelCard img {
+  object-fit: cover;
+  height: 300px;
+  width: 100%;
+}
+
+/* start stars style */
+.ratingStart {
+  position: relative;
+  font-family: "Font Awesome 5 Free";
+  display: inline-block;
+  font-size: 0;
+  unicode-bidi: bidi-override;
+  direction: rtl;
+  color: var(--first-gray-font-color);
+  letter-spacing: 3px;
+  font-size: 12px;
+}
+
+.ratingStart::before {
+  content: "\f005\f005\f005\f005\f005";
+  color: var(--first-gray-font-color);
+  font-weight: normal;
+  font-size: 20px;
+}
+
+.ratingStart span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  width: 0;
+  white-space: nowrap;
+  font-weight: 900;
+  color: #ffc700;
+}
+
+.ratingStart span::before {
+  content: "\f005\f005\f005\f005\f005";
+  font-size: 20px;
+}
+/* end stars style */
+
+@media (max-width: 650px) {
+  .hotelCard img {
+    height: 200px;
+  }
+}

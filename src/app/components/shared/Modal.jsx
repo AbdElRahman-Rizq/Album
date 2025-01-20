@@ -1,5 +1,7 @@
 'use client'
 
+import './modal.css';
+
 const Modal = ({ isAppear, onClose, children }) => {
   if (!isAppear) return null;
 

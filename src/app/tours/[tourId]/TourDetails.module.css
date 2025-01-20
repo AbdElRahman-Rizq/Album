@@ -1,0 +1,590 @@
+.banner {
+  background-color: rgba(94, 97, 97, 0.5);
+  padding-top: 130px;
+  margin-bottom: 20px;
+}
+
+.container {
+  padding: 0 50px;
+}
+
+.container h1 {
+  color: var(--main-color);
+  margin-bottom: 20px;
+}
+
+.container h2 {
+  color: var(--second-color);
+}
+
+.container ul {
+  padding: 0;
+  margin: 0;
+}
+
+.container li {
+  list-style: none;
+}
+
+/* start details section style */
+.details {
+  display: grid;
+  grid-template-columns: 2.5fr 1fr;
+  gap: 40px;
+  margin-bottom: 30px;
+}
+
+.details>div:last-child {
+  border: 2px solid var(--main-color);
+  border-radius: 20px;
+  padding: 20px;
+}
+
+/* end details section style */
+.formSubContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.bookButton {
+  display: none !important;
+}
+
+/* start left section style */
+.leftSection .images {
+  display: grid;
+  grid-template-columns: auto 200px;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 20px;
+  height: 80vh;
+  margin-bottom: 20px;
+}
+
+.leftSection .images>div {
+  background-position: center center;
+  background-size: cover;
+}
+
+.leftSection .images>div:first-child {
+  grid-row: span 3;
+}
+
+.leftSection .images>div:not(:first-child) {
+  cursor: pointer;
+  position: relative;
+}
+
+.leftSection .images>div:not(:first-child)::after {
+  content: "";
+  cursor: pointer;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  z-index: 1;
+}
+
+.leftSection .images>.active::after {
+  display: none;
+}
+
+.leftSection .images>div:last-child p {
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  color: white;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: 600;
+  font-size: 28px;
+}
+
+/* end left section style */
+
+/* start overview style */
+.overview>div {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin-bottom: 20px;
+}
+
+.overview .cardContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 5px;
+}
+
+.overview .cardContainer * {
+  margin-bottom: 0;
+}
+
+.overview .cardContainer .icon {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 2px solid var(--main-font-color);
+  color: var(--main-font-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 50px;
+}
+
+.overview .cardContainer p:first-of-type {
+  color: var(--main-color);
+  font-weight: bold;
+}
+
+.overview .cardContainer p:last-of-type {
+  color: var(--first-gray-font-color);
+}
+
+/* end overview style */
+
+/* start include/exclude style */
+.includeExclude {
+  margin: 3%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1%;
+  padding: 0 50px;
+}
+
+.includeExclude h3 {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.includeExclude h3::after {
+  content: "";
+  width: 200px;
+  height: 3px;
+  border-radius: 20px;
+}
+
+.includeExclude>div:first-child h3::after {
+  background-color: var(--second-color);
+}
+
+.includeExclude>div:last-child h3::after {
+  background-color: var(--first-gray-font-color);
+}
+
+.includeExclude>div {
+  width: 40vw;
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.includeExclude>div:first-child {
+  border: 2px solid var(--second-color);
+}
+
+.includeExclude>div:last-child {
+  border: 2px solid var(--first-gray-font-color);
+  justify-self: flex-end;
+}
+
+.includeExclude li {
+  list-style: none;
+  display: flex;
+  align-items: center;
+}
+
+.includeExclude li::before {
+  font-family: "bootstrap-icons";
+  margin-right: 10px;
+  font-size: 20px;
+}
+
+.includeExclude .include li::before {
+  content: "\F633";
+  color: var(--green);
+}
+
+.includeExclude .exclude li::before {
+  content: "\F62A";
+  color: var(--main-color);
+}
+
+
+.nbSection {
+  margin: 30px 0;
+}
+
+.nbSection h3 {
+  color: var(--main-color);
+}
+
+.nbSection li {
+  display: flex;
+  align-items: start;
+  gap: 10px;
+}
+
+.nbSection li::before {
+  content: "";
+  min-width: 10px;
+  min-height: 10px;
+  margin-top: 5px;
+  border-radius: 50%;
+  background-color: var(--main-color);
+}
+
+/* end include/exclude style */
+
+/* start itinerary style */
+.itinerary .tabs ul {
+  display: flex;
+  align-items: center;
+}
+
+.itinerary .tabs ul li {
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  color: var(--first-gray-font-color);
+}
+
+.itinerary .tabs ul li:not(.active):hover {
+  background-color: rgba(128, 128, 128, 0.2);
+}
+
+.itinerary .tabs ul .active {
+  background-color: var(--main-color);
+  color: white;
+  font-weight: 600;
+}
+
+.itinerary .page {
+  border: 1px solid var(--main-color);
+  margin-bottom: 30px;
+}
+
+/* end itinerary style */
+
+/* start cabin style */
+.cabin {
+  margin: 40px 0;
+}
+
+.cabin li {
+  display: flex;
+  align-items: start;
+  gap: 10px;
+  font-size: 18px;
+}
+
+.cabin li::before {
+  content: "";
+  margin-top: 8px;
+  min-width: 10px;
+  min-height: 10px;
+  border-radius: 50%;
+  background-color: var(--second-color);
+}
+
+/* end cabin style */
+
+.PricesCardsContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 30px;
+}
+
+/* start stars style */
+.ratingStart {
+  position: relative;
+  font-family: "Font Awesome 5 Free";
+  display: inline-block;
+  font-size: 0;
+  unicode-bidi: bidi-override;
+  direction: rtl;
+  color: var(--first-gray-font-color);
+  letter-spacing: 3px;
+  font-size: 12px;
+}
+
+.ratingStart::before {
+  content: "\f005\f005\f005\f005\f005";
+  color: var(--first-gray-font-color);
+  font-weight: normal;
+  font-size: 20px;
+}
+
+.ratingStart span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  width: 0;
+  white-space: nowrap;
+  font-weight: 900;
+  color: #ffc700;
+}
+
+.ratingStart span::before {
+  content: "\f005\f005\f005\f005\f005";
+  font-size: 20px;
+}
+
+/* end stars style */
+
+/* start reviews style */
+.reviews {
+  margin: 30px 0;
+}
+
+.reviewsContainer {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  gap: 50px;
+}
+
+.reviewsContainer>div {
+  padding: 0 30px;
+}
+
+.mainReview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mainReview p,
+.mainReview h1 {
+  margin: 0;
+  padding: 0;
+}
+
+.mainReview h1 {
+  font-size: 200px;
+  color: #ffc700;
+}
+
+.mainReview .ratingStart::before,
+.mainReview .ratingStart span::before {
+  font-size: 34px;
+}
+
+.mainReview>p {
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--first-gray-font-color);
+}
+
+.ratePrecentageContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.ratePrecentageContainer>div {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-content: center;
+  gap: 10px;
+}
+
+.ratePrecentageContainer>div>p {
+  margin: 0;
+}
+
+.ratePrecentageContainer>div>p:first-child {
+  color: var(--second-color);
+  font-weight: 600;
+}
+
+.rate {
+  background-color: rgba(128, 128, 128, 0.2);
+  width: 100%;
+  height: 10px;
+  align-self: center;
+  position: relative;
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+.rate>div {
+  position: absolute;
+  height: 100%;
+  background-color: var(--second-color);
+}
+
+.reviewCardContainer:not(:last-of-type) {
+  border-bottom: 1px solid rgba(128, 128, 128, 0.2);
+  margin-bottom: 20px;
+}
+
+.reviewCardContainer .userData {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.userData p {
+  color: var(--second-color);
+  margin-bottom: 5px;
+}
+
+.reviewsContainer button {
+  width: 100%;
+  border: none;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* end reviews style */
+
+@media (max-width: 1100px) {
+  .banner {
+    padding-top: 150px;
+  }
+
+  .container h1 {
+    font-size: 50px;
+  }
+
+  .leftSection .images {
+    grid-template-columns: auto 100px;
+    height: 50vh;
+  }
+
+  .leftSection .images>div:last-child p {
+    font-size: 18px;
+  }
+
+  .overview .cardContainer .icon {
+    width: 80px;
+    height: 80px;
+    font-size: 40px;
+  }
+
+  .overview .cardContainer h3 {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 900px) {
+  .banner {
+    padding-top: 162px;
+  }
+
+  .details {
+    grid-template-columns: 1fr;
+  }
+
+  .bookButton {
+    display: block !important;
+    text-align: center;
+  }
+
+  .details>div:last-child {
+    display: none;
+  }
+
+  .includeExclude {
+    padding: 0;
+  }
+
+  .PricesCardsContainer {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .reviews {
+    margin: 10px 0;
+  }
+
+  .reviewsContainer {
+    gap: 30px;
+  }
+
+  .reviewsContainer>div {
+    padding: 0 10px;
+  }
+}
+
+@media (max-width: 650px) {
+  .container {
+    padding: 0 20px;
+  }
+
+  .container h1 {
+    font-size: 30px;
+  }
+
+  .includeExclude {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .includeExclude>div {
+    width: 100%;
+  }
+
+  .includeExclude h3::after {
+    width: 100px;
+  }
+
+  .itinerary .tabs ul {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .itinerary .tabs ul li {
+    width: 100%;
+  }
+
+  .PricesCardsContainer {
+    grid-template-columns: 1fr;
+  }
+
+  .reviewsContainer {
+    grid-template-columns: 1fr;
+    margin-bottom: 30px;
+  }
+
+  .mainReview h1 {
+    font-size: 100px;
+  }
+}
+
+@media (max-width: 420px) {
+  .container {
+    padding: 0 10px;
+  }
+
+  .overview>div {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .leftSection .images {
+    grid-template-columns: auto 50px;
+    height: 20vh;
+    gap: 5px;
+  }
+
+  .leftSection .images>div:last-child p {
+    font-size: 8px;
+  }
+
+  .formSubContainer {
+    grid-template-columns: 1fr;
+  }
+
+  .cabin li {
+    font-size: 16px;
+  }
+}

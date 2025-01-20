@@ -1,10 +1,9 @@
 // hoc/WithAuth.js
-"use client";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import { useEffect } from "react";
 
-export default function withAuth(WrappedComponent, redirectPath = "/login") {
+export default function withAuth(WrappedComponent, { redirectPath = "/login" } = {}) {
   return function ProtectedRoute(props) {
     const router = useRouter();
 
@@ -13,7 +12,7 @@ export default function withAuth(WrappedComponent, redirectPath = "/login") {
       if (!token) {
         router.push(redirectPath);
       }
-    }, [router]);
+    }, [router, redirectPath]);
 
     return <WrappedComponent {...props} />;
   };

@@ -54,7 +54,7 @@ export const HomeBlogProvider = ({ children }) => {
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            Authorization: `Bearer ${Cookies.get("album-token")}`,
           },
         }
       ),
@@ -64,7 +64,7 @@ export const HomeBlogProvider = ({ children }) => {
       axios.delete(`${api_url}home/${langId}`, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          Authorization: `Bearer ${Cookies.get("album-token")}`,
         },
       }),
     onSuccess: () => {
@@ -85,17 +85,20 @@ export const HomeBlogProvider = ({ children }) => {
       axios.get(`${api_url}home/${lang?.name}`, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          Authorization: `Bearer ${Cookies.get("album-token")}`,
         },
       }),
     enabled: !!lang,
+    staleTime: 0, // Ensure data is always considered stale and refetched
+    refetchOnWindowFocus: true, // Refetch when window is focused
+    refetchOnMount: true, // Refetch when component mounts
   });
   const { mutate: addSection, isPending: isAddSectionLoading } = useMutation({
     mutationFn: (data) =>
       axios.post(`${api_url}home/subcard`, data, {
         headers: {
           Accept: "application/json",
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          Authorization: `Bearer ${Cookies.get("album-token")}`,
         },
       }),
     onSuccess: () => {
@@ -113,7 +116,7 @@ export const HomeBlogProvider = ({ children }) => {
         axios.post(`${api_url}home/subcard`, data, {
           headers: {
             Accept: "application/json",
-            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            Authorization: `Bearer ${Cookies.get("album-token")}`,
           },
         }),
       onSuccess: () => {
@@ -131,7 +134,7 @@ export const HomeBlogProvider = ({ children }) => {
       axios.get(`${api_url}language`, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          Authorization: `Bearer ${Cookies.get("album-token")}`,
         },
       }),
   });
@@ -151,11 +154,13 @@ export const HomeBlogProvider = ({ children }) => {
       });
     }
   }, [data]);
+
   useEffect(() => {
     if (blogData?.data?.data) {
       setBlog(blogData?.data?.data);
     }
   }, [blogData]);
+
   return (
     <HomeBlogContext.Provider
       value={{

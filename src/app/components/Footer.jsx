@@ -3,7 +3,14 @@ import { ADDRESS, INFO_MAILE, PHONE1, PHONE2 } from "../constants/globals";
 import Link from "next/link";
 import Image from "next/image";
 import SocialMadia from "./socialMedia";
-import { useHomeBlog } from "@/home/HomeBlogProvider";
+
+import { useEffect, useState } from "react";
+import {
+  FaPhoneAlt,
+  FaEnvelope,
+  FaMapMarkerAlt
+} from "react-icons/fa";
+import { useHomeBlog } from "@/providers/HomeBlogContext";
 
 const Footer = ({
   isLoggedIn,
@@ -15,12 +22,42 @@ const Footer = ({
   setContent,
 }) => {
   const { blog, isBlogLoading } = useHomeBlog();
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  // Function to handle phone click
+  const handlePhoneClick = (phoneNumber) => {
+    // Remove any non-digit characters
+    const cleanedPhoneNumber = phoneNumber.replace(/\D/g, "");
+
+    // Different handling for web and mobile
+    if (typeof window !== "undefined") {
+      // For mobile devices or when accessed from a phone
+      window.location.href = `tel:+${cleanedPhoneNumber}`;
+    }
+  };
+
+  // Function to handle email click
+  const handleEmailClick = (email) => {
+    if (typeof window !== "undefined") {
+      // Open default email client
+      window.location.href = `mailto:${email}`;
+    }
+  };
+
+  useEffect(() => {
+    setIsLoaded(true);
+  }, []);
+
+  if (!isLoaded) {
+    return null; // Prevent rendering until content is fully loaded
+  }
+
   return (
     <footer
       id="colophon"
       className={`site-footer footer-primary ${isLoggedIn === "true" && userType === "admin"
-          ? "force-display-none"
-          : ""
+        ? "force-display-none"
+        : ""
         }`}
     >
       <div className="top-footer">
@@ -182,16 +219,50 @@ const Footer = ({
                           />
                         </>
                       ) : (
-                        <a href="#" className="flex">
-                          <i className="fas fa-phone-alt"></i>
-                          <span>
-                            {blog?.sub_card_13?.content?.split("-.-")?.[2] ||
-                              PHONE1}
-                            , <br />
-                            {blog?.sub_card_13?.content?.split("-.-")?.[3] ||
-                              PHONE2}
-                          </span>
-                        </a>
+                        <div className="">
+                          <a
+                            href={`tel:+${blog?.sub_card_13?.content?.split("-.-")?.[2] ||
+                              PHONE1.replace(/\D/g, "")
+                              }`}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              handlePhoneClick(
+                                blog?.sub_card_13?.content?.split("-.-")?.[2] ||
+                                PHONE1
+                              );
+                            }}
+                            className="flex items-center mb-2"
+                          >
+                            <FaPhoneAlt style={{ marginRight: "5px" }} />
+                            <span>
+                              {blog?.sub_card_13?.content?.split("-.-")?.[2] ||
+                                PHONE1}
+                            </span>
+                          </a>
+                          {PHONE2 && (
+                            <a
+                              href={`tel:+${blog?.sub_card_13?.content?.split("-.-")?.[3] ||
+                                PHONE2.replace(/\D/g, "")
+                                }`}
+                              onClick={(e) => {
+                                e.preventDefault();
+                                handlePhoneClick(
+                                  blog?.sub_card_13?.content?.split(
+                                    "-.-"
+                                  )?.[3] || PHONE2
+                                );
+                              }}
+                              className="flex items-center"
+                            >
+                              <FaPhoneAlt style={{ marginRight: "5px" }} />
+                              <span>
+                                {blog?.sub_card_13?.content?.split(
+                                  "-.-"
+                                )?.[3] || PHONE2}
+                              </span>
+                            </a>
+                          )}
+                        </div>
                       )}
                     </li>
                     <li>
@@ -212,10 +283,12 @@ const Footer = ({
                           }}
                         />
                       ) : (
-                        <a href="#">
-                          <i className="fas fa-envelope"></i>
-                          {blog?.sub_card_13?.content?.split("-.-")?.[4] ||
-                            INFO_MAILE}
+                        <a
+                          onClick={() => handleEmailClick(INFO_MAILE)}
+                          style={{ cursor: "pointer" }}
+                        >
+                          <FaEnvelope style={{ marginRight: "5px" }} />
+                          {INFO_MAILE}
                         </a>
                       )}
                     </li>
@@ -238,9 +311,8 @@ const Footer = ({
                         />
                       ) : (
                         <>
-                          <i className="fas fa-map-marker-alt"></i>
-                          {blog?.sub_card_13?.content?.split("-.-")?.[5] ||
-                            ADDRESS}
+                          <FaMapMarkerAlt style={{ marginRight: "5px" }} />
+                          {ADDRESS}
                         </>
                       )}
                     </li>
@@ -508,7 +580,8 @@ const Footer = ({
                 </a>
               </div>
 
-              <SocialMadia />
+              <SocialMadia color="white" />
+
             </div>
             <div className="col-md-5">
               <div
@@ -540,7 +613,7 @@ const Footer = ({
                   />
                 ) : (
                   blog?.sub_card_13?.content?.split("-.-")?.[12] ||
-                  "Copyright © 2024 Album Travel. All rights reserved"
+                  "Copyright  2024 Album Travel. All rights reserved"
                 )}
                 {contentEditable ? (
                   <input

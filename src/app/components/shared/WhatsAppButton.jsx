@@ -1,5 +1,7 @@
+"use client";
 import { useState, useEffect } from "react";
-import FaWhatsapp from "../../images/whatsapp-icon.png";
+import FaWhatsapp from "@/assets/images/whatsapp-icon.png";
+import Image from "next/image";
 
 const WhatsAppButton = () => {
   const [showButton, setShowButton] = useState(false);
@@ -33,7 +35,7 @@ const WhatsAppButton = () => {
         target="_blank"
         rel="noopener noreferrer"
       >
-        <img src={FaWhatsapp} width={100} />
+        <Image src={FaWhatsapp} alt="whatsapp" width={80} height={100} />
       </a>
     )
   );

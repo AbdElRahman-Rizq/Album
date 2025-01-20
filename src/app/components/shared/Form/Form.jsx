@@ -5,10 +5,11 @@ import { FaPlus } from "react-icons/fa6";
 import { IoCloseCircle } from "react-icons/io5";
 import { SlCloudUpload } from "react-icons/sl";
 import { useState } from 'react';
-import EmptyNoItems from '../../../Admin/components/emptyNoItems/emptyNoItems';
+
 import { COLORS } from '../../../constants/colors';
 import Loading from '../Loading/Loading';
 import { api_url } from '../../../constants/base_url';
+import EmptyNoItems from '../EmptyNoItems';
 
 
 const Form = ({ title, className, children, onSubmit }) => {
@@ -38,6 +39,7 @@ const TextController = ({
     values,
     setValue,
     type = 'text',
+    selectedCode,
 }) => {
     return (
         <div className={style.inputContainer}>
@@ -50,12 +52,17 @@ const TextController = ({
                         name="name-title"
                         values={values}
                         setValue={setValue}
+                        onChange={(e) => {
+                            const selectedValue = e.target.value;
+                            setValue(registername, selectedValue);
+                            onChange && onChange(e);
+                        }}
                     />
                 )}
                 <input
-                    {...(register && register(registername, validationRules))} // Ensure register is called properly
+                    {...(register && register(registername, validationRules))}
                     type={type}
-                    value={value}
+                    value={selectedCode || value}
                     placeholder={placeholder}
                     onChange={onChange}
                 />
@@ -64,16 +71,49 @@ const TextController = ({
     );
 };
 
-const SelectController = ({ options, name, placeholder, value, onChange, values, setValue, registername, validationRules, errorMessage, register }) => {
+const SelectController = ({
+    options,
+    name,
+    placeholder,
+    value,
+    onChange,
+    values,
+    setValue,
+    registername,
+    validationRules,
+    errorMessage,
+    register,
+}) => {
     return (
         <div className={style.inputContainer}>
             {errorMessage && <span className={style.helperText}>{errorMessage}</span>}
-            <select {...(register && register(registername, validationRules))} name={name} value={value} onChange={(e) => {
-                onChange && onChange(e)
-                placeholder === "Code" && setValue("code", e.target.value)
-            }}>
-                <option value="" disabled selected>{placeholder}</option>
-                {options.map((option, index) => <option key={index} value={values?.length ? values[index] : option}>{option}</option>)}
+            <select
+                {...(register && register(registername, validationRules))}
+                name={name}
+                value={value}
+                onChange={(e) => {
+                    const selectedValue = e.target.value;
+                    onChange && onChange(e);
+                    setValue(registername, selectedValue);
+                }}
+            >
+                <option value="" disabled>
+                    {placeholder}
+                </option>
+                {options.map((option, index) => {
+                    if (option) {
+                        const parts = option.split(" (");
+                        if (parts.length === 2) {
+                            const code = parts[1].replace(")", "");
+                            return (
+                                <option key={index} value={code}>
+                                    {code}
+                                </option>
+                            );
+                        }
+                    }
+                    return null;
+                })}
             </select>
         </div>
     );

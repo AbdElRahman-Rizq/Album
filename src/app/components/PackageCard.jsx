@@ -1,6 +1,12 @@
 'use client'
 import Link from 'next/link'
 import Image from 'next/image'
+import {
+  FaClock,
+  FaUserFriends,
+  FaMapMarkerAlt,
+  FaArrowRight
+} from 'react-icons/fa'
 
 const PackageCard = ({
   buttonColor,
@@ -24,7 +30,7 @@ const PackageCard = ({
         <figure className="feature-image">
           <Link href={`/tours/${id}`}>
             <Image
-              src={`${api_url}${image}`.slice(0, -4)}
+              src={`${api_url}${image}`.replace("/api/", "/")}
               alt={title}
               width={300}
               height={350}
@@ -39,15 +45,15 @@ const PackageCard = ({
           <div className="package-meta text-center">
             <ul>
               <li>
-                <i className="far fa-clock"></i>
+                <FaClock style={{ marginRight: '5px' }} />
                 {duration}
               </li>
               <li>
-                <i className="fas fa-user-friends"></i>
+                <FaUserFriends style={{ marginRight: '5px' }} />
                 People: {people}
               </li>
               <li>
-                <i className="fas fa-map-marker-alt"></i>
+                <FaMapMarkerAlt style={{ marginRight: '5px' }} />
                 {location}
               </li>
             </ul>
@@ -68,7 +74,7 @@ const PackageCard = ({
                 href="/tours"
                 className={`button-text ${buttonColor === "red" ? "text-white book" : ""} width-6`}
               >
-                Book Now<i className="fas fa-arrow-right"></i>
+                Book Now <FaArrowRight style={{ marginLeft: '5px' }} />
               </Link>
               <h6 className="package-price">{children}</h6>
             </div>

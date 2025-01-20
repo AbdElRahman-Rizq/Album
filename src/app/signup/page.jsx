@@ -39,7 +39,6 @@ const Signup = () => {
       });
     },
     onSuccess: (data) => {
-      console.log("Registration successful", data);
       setVerifyEmailBox(true);
     },
     onError: (error) => {
@@ -59,7 +58,6 @@ const Signup = () => {
       });
     },
     onSuccess: () => {
-      console.log("Email verification successful");
       notifySuccess("Email verification successful");
       setVerifyEmailBox(false);
       router.push("/login");

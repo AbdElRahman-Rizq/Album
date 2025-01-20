@@ -1,12 +1,13 @@
-:root {
+.root {
   --emptyColor: rgba(128, 128, 128, 0.5);
   --emptyBackground: rgba(128, 128, 128, 0.1);
 }
 
 .container h1 {
-  font-size: 40px;
+  font-size: 1.8rem;
   color: var(--main-color);
 }
+
 .container h2 {
   font-size: 30px;
   color: var(--second-color);
@@ -20,6 +21,7 @@
   gap: 15px;
   height: 100%;
 }
+
 
 .helperText {
   color: var(--main-color);
@@ -83,7 +85,7 @@
   font-size: 14px;
 }
 
-.counterContainer > div:last-child {
+.counterContainer>div:last-child {
   display: flex;
   align-items: center;
   gap: 15px;
@@ -91,7 +93,8 @@
   border-radius: 30px;
   overflow: hidden;
 }
-.counterContainer > div:last-child > button {
+
+.counterContainer>div:last-child>button {
   color: white;
   background-color: var(--second-color);
   padding: 5px 8px;
@@ -99,13 +102,14 @@
   border: none;
 }
 
-.counterContainer > div:last-child > button:active {
+.counterContainer>div:last-child>button:active {
   outline: none;
   border: none;
   transform: scale(0.97);
 }
+
 /* end counterContainer style */
-.inputContainer > button {
+.inputContainer>button {
   width: 100%;
   border: none;
   padding: 15px;
@@ -114,7 +118,8 @@
   font-weight: 600;
   font-size: 18px;
 }
-.inputContainer > button:active {
+
+.inputContainer>button:active {
   transform: scale(0.97);
 }
 
@@ -147,17 +152,18 @@
   font-size: 20px;
 }
 
-.inputContainer .listContainer > div {
+.inputContainer .listContainer>div {
   display: flex;
   align-items: center;
   height: 45px;
   overflow: hidden;
 }
-.inputContainer .listContainer > div button {
+
+.inputContainer .listContainer>div button {
   background-color: var(--second-color) !important;
 }
 
-.inputContainer .listContainer > div button:active {
+.inputContainer .listContainer>div button:active {
   transform: scale(0.97);
 }
 
@@ -174,12 +180,15 @@
   color: var(--emptyColor);
   font-weight: 600;
 }
+
 .dragAndDrop p {
   margin: 0;
 }
+
 .dragAndDrop svg {
   font-size: 100px;
 }
+
 .dragAndDrop button {
   color: white !important;
   font-weight: bold;
@@ -196,17 +205,18 @@
   justify-content: space-between;
 }
 
-.videoCard > div {
+.videoCard>div {
   display: flex;
   align-items: center;
   gap: 10px;
   width: 90%;
 }
-.videoCard > div p {
+
+.videoCard>div p {
   overflow-wrap: anywhere;
 }
 
-.videoCard > div .icon {
+.videoCard>div .icon {
   color: var(--main-color);
   font-size: 30px;
   background-color: var(--light-main-color);
@@ -217,23 +227,28 @@
   align-items: center;
   justify-content: center;
 }
+
 .videoCard button {
   border: none;
   color: var(--main-color);
   background-color: transparent;
   font-size: 20px;
 }
+
 .videoCard p {
   margin: 0;
 }
+
 .videoCard button:active {
   transform: scale(0.96) !important;
 }
+
 .initialValueContainer {
   width: 400px;
   height: 300px;
   position: relative;
 }
+
 .initialValueContainer img {
   width: 100%;
   height: 100%;
@@ -242,6 +257,7 @@
   object-position: center;
   z-index: 1;
 }
+
 .initialValueContainer svg {
   z-index: 2;
   position: absolute;
@@ -257,7 +273,41 @@
   .container h1 {
     font-size: 30px;
   }
+
   .inputContainer .inputWithOptions {
-    grid-template-columns: 80px 1fr;
+    grid-template-columns: 6rem 1fr;
   }
 }
+
+/* start mobile styles */
+@media (max-width: 768px) {
+  .container h1 {
+    font-size: 28px;
+  }
+
+  .container form {
+    gap: 10px;
+  }
+
+  .inputContainer input,
+  .inputContainer select,
+  .inputContainer textarea {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .inputContainer>button {
+    font-size: 16px;
+    padding: 12px;
+  }
+
+  .listContainer ul li {
+    padding: 8px 10px;
+  }
+
+  .dragAndDrop {
+    padding: 15px;
+  }
+}
+
+/* end mobile styles */

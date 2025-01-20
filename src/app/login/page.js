@@ -16,6 +16,7 @@ import Cookies from "js-cookie";
 import { loginSchema } from "./Validations/login.schema";
 import "@/page.module.css";
 import { notifyError, notifySuccess } from "@/components/shared/notify";
+import "./login.css";
 
 export default function Login() {
   const router = useRouter();
@@ -52,7 +53,7 @@ export default function Login() {
       console.log("Logged in successfully", data?.data?.data);
 
       Cookies.set("album-token", data?.data?.data.access_token);
-      Cookies.set("currentUser", data?.data?.data?.user);
+      Cookies.set("currentUser", data?.data?.data?.roles[0]);
       notifySuccess("Logged in successfully");
 
       switch (data?.data?.data?.user?.roles[0].name) {
@@ -60,7 +61,7 @@ export default function Login() {
           router.push("/admin");
           break;
         case ROLES.USER:
-          router.push("/home");
+          router.push("/");
           break;
         default:
           break;
@@ -77,7 +78,10 @@ export default function Login() {
   };
 
   return (
-    <div className="login-page" style={{ backgroundImage: `url('/bg.jpg')` }}>
+    <div
+      className="login-page"
+      style={{ backgroundImage: `url('/images/bg.jpg')` }}
+    >
       <button
         className="button-primary"
         style={{
@@ -98,7 +102,12 @@ export default function Login() {
         <AuthForm onSubmit={handleSubmit(onSubmit)}>
           <h1 className="site-title">
             <Link href="#">
-              <Image src="/logo.png" alt="logo" width={100} height={50} />
+              <Image
+                src="/images/logo.png"
+                alt="logo"
+                width={100}
+                height={50}
+              />
             </Link>
           </h1>
 

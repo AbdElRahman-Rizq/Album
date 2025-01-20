@@ -1,6 +1,6 @@
-'use client'
-import Image from 'next/image'
-import Slider from "react-slick"
+"use client";
+import Image from "next/image";
+import Slider from "react-slick";
 
 import logo1 from "@/assets/images/logo1.png";
 import logo2 from "@/assets/images/logo2.png";
@@ -31,20 +31,20 @@ const ClientSection = () => {
         settings: {
           slidesToShow: 3,
           slidesToScroll: 2,
-        }
+        },
       },
       {
         breakpoint: 768,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 1,
-        }
-      }
-    ]
+        },
+      },
+    ],
   };
 
   return (
-    <div className="client-section">
+    <div className="client-section ">
       <div className="container-fluid">
         <div className="client-wrap client-slider secondary-bg">
           <Slider {...settings}>

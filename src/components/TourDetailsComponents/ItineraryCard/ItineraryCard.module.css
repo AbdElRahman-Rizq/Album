@@ -1,0 +1,75 @@
+.itineraryCard {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    border: 1px solid var(--main-color);
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.map {
+    height: 400px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.daysContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    overflow-y: auto;
+    max-height: 400px;
+}
+
+.daySectionContainer {
+    border: 1px solid var(--first-gray-font-color);
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+.daySectionContainer h3 {
+    color: var(--main-color);
+    margin-bottom: 10px;
+}
+
+.daySectionContainer h4 {
+    color: var(--second-color);
+    margin-top: 10px;
+}
+
+.daySectionContainer h4 span {
+    color: var(--main-font-color);
+    margin-left: 10px;
+}
+
+.programDetailsContainer {
+    margin-bottom: 10px;
+}
+
+.programDetailsContainer p {
+    margin-bottom: 5px;
+    color: var(--main-font-color);
+}
+
+.programDetailsContainer h4 {
+    color: var(--first-gray-font-color);
+    font-style: italic;
+}
+
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+@media (max-width: 900px) {
+    .itineraryCard {
+        grid-template-columns: 1fr;
+    }
+
+    .map {
+        height: 300px;
+    }
+}

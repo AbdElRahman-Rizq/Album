@@ -1,0 +1,69 @@
+.booking-form-wrap {
+    background-color: #f8f8f8;
+    padding: 30px;
+}
+
+.booking-form-wrap .booking-form h4 {
+    margin-top: 5px;
+}
+
+.booking-form-wrap .form-group label .custom-checkbox {
+    border-color: #b5b5b5;
+}
+
+.booking-form-wrap .submit-btn {
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
+.booking-content {
+    margin-bottom: 60px;
+}
+
+.booking-content .form-title {
+    margin-bottom: 30px;
+}
+
+.booking-content .form-title h3 {
+    text-transform: uppercase;
+    display: inline-block;
+}
+
+.booking-content .form-title span {
+    background-color: #d51c29;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    -ms-border-radius: 100%;
+    border-radius: 100%;
+    color: #ffffff;
+    display: inline-block;
+    font-size: 20px;
+    height: 50px;
+    line-height: 50px;
+    margin-right: 20px;
+    text-align: center;
+    width: 50px;
+}
+
+.booking-content .info-content {
+    border-top: 1px solid #e6e6e6;
+    margin-top: 30px;
+    padding-top: 30px;
+}
+
+@media screen and (max-width: 575px) {
+    .booking-content {
+        margin-bottom: 30px;
+    }
+
+    .booking-content .form-title {
+        margin-bottom: 15px;
+    }
+
+    .booking-content .form-title span {
+        height: 30px;
+        line-height: 30px;
+        margin-right: 16px;
+        width: 30px;
+    }
+}
