@@ -1,7 +1,7 @@
-import IneerBanner from "@/components/IneerBanner";
-import DistiItem from "@/components/distiItem";
+import IneerBanner from "@/components/IneerBanner/IneerBanner";
+import DistiItem from "@/components/distiItem/distiItem";
 import { api_url } from "@/constants/base_url";
-import SubscribeSection from "@/components/SubscribeSection";
+import SubscribeSection from "@/components/SubscribeSection/SubscribeSection";
 import style from "./destination.module.css";
 import axios from "axios";
 import { cookies } from "next/headers";
@@ -29,11 +29,11 @@ export default async function Destination() {
     });
 
     // Check for successful response
-    if (response.status !== 200) {
+    if (response?.status !== 200) {
       throw new Error("Error fetching destinations");
     }
 
-    const destinations = response.data?.data || [];
+    const destinations = response?.data?.data || [];
 
     return (
       <main id="content" className="site-main">

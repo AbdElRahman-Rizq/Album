@@ -1,0 +1,36 @@
+
+.social-links ul {
+    margin: 0;
+    padding: 0;
+    font-size: 0;
+  }
+  
+  .social-links li {
+    display: inline-block;
+    list-style: none;
+    margin: 0 10px;
+  }
+  
+  .social-links a {
+    font-size: 16px;
+    color: #404040;
+    -webkit-transition: color 0.4s;
+    -moz-transition: color 0.4s;
+    -ms-transition: color 0.4s;
+    -o-transition: color 0.4s;
+    transition: color 0.4s;
+  }
+  
+  .social-links a:hover,
+  .social-links a:focus,
+  .social-links a:active {
+    color: #2c75ba;
+  }
+
+
+
+@media (max-width: 888px) {
+.top-header .social-links ul LI {
+  margin: 0 7.5px;
+}
+}

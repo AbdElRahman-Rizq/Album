@@ -1,0 +1,304 @@
+/* signup form css -------------------------------------  */
+
+
+.login-page {
+    display: flex;
+    min-height: 100vh;
+    background: none;
+    width: 100%;
+    position: relative;
+    flex-direction: row-reverse;
+}
+
+.login-page::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 60%;
+    height: 100%;
+    background-image: var(--bg-image);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: all 0.3s ease;
+}
+
+.login-from-wrap {
+    width: 40%;
+    padding: 2rem 4rem;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 2;
+    background: #fff;
+    height: 100vh;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #dc2626 #f3f4f6;
+}
+
+.login-from-wrap::-webkit-scrollbar {
+    width: 8px;
+}
+
+.login-from-wrap::-webkit-scrollbar-track {
+    background: #f3f4f6;
+}
+
+.login-from-wrap::-webkit-scrollbar-thumb {
+    background-color: #dc2626;
+    border-radius: 4px;
+    border: 2px solid #f3f4f6;
+}
+
+.login-from-wrap h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.login-from-wrap p {
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+.login-from-wrap form {
+   
+    margin-top: 13rem !important;
+}
+
+.login-from-wrap .site-title {
+    text-align: left;
+    margin-bottom: 2rem;
+}
+
+.login-from-wrap .site-title img {
+    max-width: 120px;
+}
+
+.login-from-wrap .TextController {
+    margin-bottom: 1.5rem;
+}
+
+.login-from-wrap .TextController label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #374151;
+}
+
+.login-from-wrap .TextController input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+}
+
+.login-from-wrap .TextController input:focus {
+    outline: none;
+    border-color: #dc2626;
+    box-shadow: 0 0 0 1px #dc2626;
+}
+
+
+.login-from-wrap .swap-login-signup {
+    text-align: center;
+    margin-top: 1.5rem;
+    color: #4b5563;
+}
+
+.login-from-wrap .swap-login-signup a {
+    color: #dc2626;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.login-from-wrap .swap-login-signup a:hover {
+    text-decoration: underline;
+}
+
+.countryCodeInput {
+    margin-right: .5rem;
+    width: 7.3em;
+}
+
+
+
+/* Hide mobile title and description on desktop */
+.login-page h2.mobile-title,
+.login-page p.mobile-description {
+    display: none;
+}
+
+/* Style modal for desktop */
+.verify-email-box {
+    background: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+}
+
+.verify-email-box h2 {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.verify-email-box p {
+    text-align: center;
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+
+.verify-email-box input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+
+.login-page .login-from-wrap>p {
+    margin-bottom: 1.5%;
+}
+
+/* Mobile styles */
+@media screen and (max-width: 768px) {
+
+    /* .login-page .login-from-wrap h2 {
+        margin-top: 150%;
+    } */
+
+    .login-page .login-from-wrap>p {
+        margin-bottom: .5%;
+    }
+
+    .login-page {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding: .8rem;
+        background: none;
+        flex-direction: column;
+    }
+
+    .login-page::before {
+        width: 100%;
+        height: 100%;
+        opacity: 1;
+        z-index: 1;
+    }
+
+    .login-from-wrap {
+        width: 100%;
+        max-width: 450px;
+        margin: 0 auto;
+        /* margin-top: 1rem; */
+        /* padding: 1.5rem; */
+        height: auto;
+        /* max-height: calc(100vh - 5rem); */
+        /* border-radius: 1.5rem; */
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        z-index: 2;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        overflow-y: auto;
+    }
+
+    .login-from-wrap::-webkit-scrollbar {
+        display: none;
+        /* Chrome, Safari and Opera */
+    }
+
+    /* .login-page h2.mobile-title {
+        color: white;
+        font-size: 2rem;
+        font-weight: 600;
+        text-align: center;
+        margin-top: 2rem;
+        z-index: 2;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .login-page p.mobile-description {
+        color: white;
+        text-align: center;
+        margin-top: 0.5rem;
+        z-index: 2;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        padding: 0 1rem;
+    } */
+
+
+    /* Adjust phone input grid for mobile */
+    div[style*="grid-template-columns"] {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: .5rem !important;
+    }
+
+    .countryCodeInput {
+        width: 100%;
+        margin-right: 0;
+    }
+
+    #phone {
+        width: 100%;
+    }
+
+    /* Style modal for mobile */
+    .verify-email-box {
+        width: 90%;
+        max-width: 400px;
+        padding: 1.5rem;
+        border-radius: 1rem;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    .verify-email-box h2 {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+
+    .verify-email-box p {
+        text-align: center;
+        font-size: 0.9rem;
+    }
+
+    .verify-email-box input {
+        width: 100%;
+        padding: 0.75rem;
+        margin: 1rem 0;
+        border: 1px solid #d1d5db;
+        border-radius: 0.5rem;
+        font-size: 1rem;
+    }
+
+   
+}
+
+@media screen and (max-width: 480px) {
+    .login-page {
+        /* padding: 0.1rem; */
+    }
+
+    .login-from-wrap {
+        margin-top: .5rem;
+        /* padding: 0.25rem; */
+        /* max-height: calc(100vh - 10rem); */
+    }
+
+    .verify-email-box {
+        width: 95%;
+        padding: 1.25rem;
+    }
+}

@@ -5,15 +5,16 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import SliderItem from "./SliderItem";
 import Modal from "../shared/Modal";
-import BookingForm from "../BookingForm";
-import Loading from "../shared/Loading/Loading";
+import BookingForm from "../BookingForm/BookingForm";
+import Loading from "@/components/shared/Loading/Loading";
 
 import { toast } from "react-toastify";
 import { api_url } from "@/constants/base_url";
 
 import "./sliderArrows.css";
-import { getTokenFromCookies } from "../../../utils/cookieUtils";
+
 import { useHomeBlog } from "@/providers/HomeBlogContext";
+import { getTokenFromCookies } from "@/utils/cookieUtils";
 
 const HomeSliderSection = () => {
   const settings = {
@@ -102,12 +103,13 @@ const HomeSliderSection = () => {
 
   return (
     <section className="home-slider-" style={{ position: "relative" }}>
-      <div className="overlay" style={{
+      <div className="slider-overlay" style={{
         position: "absolute",
+        top: 0,
         bottom: 0,
         left: 0,
         right: 0,
-        height: "101vh", // Adjust height as needed
+
         backgroundColor: "rgba(0, 0, 0, 0.2)", // Semi-transparent black
         zIndex: 99, // Ensure it appears above other content
         pointerEvents: 'none' // Prevent it from blocking interactions
@@ -115,7 +117,7 @@ const HomeSliderSection = () => {
 
 
       <div className="banner-content" style={{
-        position: "absolute",        
+        position: "absolute",
         top: "45%",
         zIndex: "1000",
         color: "white"
@@ -150,13 +152,13 @@ const HomeSliderSection = () => {
             ))}
           </Slider>
         ) : (
-          <div style={{ height: '500px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-            No slider content available
-          </div>
+            <div className="loading" style={{ marginTop: "5rem" }}>
+              <Loading color={"#d51c29"} />
+            </div>
         )
       }
 
-      <div className="fixed-form-content" style={{ zIndex: "1000" }}>
+      <div className="fixed-form-content" >
         {isOpen && (
           <Modal isAppear onClose={() => setIsOpen(false)}>
             <BookingForm
@@ -167,6 +169,7 @@ const HomeSliderSection = () => {
                 from_date: selectedDate,
                 destination_id: selectedDestination,
               }}
+              requireLogin={false}
             >
               <select
                 name="travel-destination"
@@ -195,7 +198,7 @@ const HomeSliderSection = () => {
 
         <div
           className="trip-search-section"
-          style={{ position: "absolute", bottom: "10%", width: "100%", zIndex: "1000", }}
+          style={{ position: "absolute", bottom: "10%", width: "100%", zIndex: "200", }}
         >
           <div className="container-fluid">
             <div className="trip-search-inner d-flex justify-content-center" style={{ cursor: "pointer" }}>

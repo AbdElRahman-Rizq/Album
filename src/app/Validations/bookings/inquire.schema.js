@@ -2,7 +2,9 @@ import { z } from "zod";
 
 export const inquireSchema = z.object({
     email: z.string().email('Invalid email address'),
-    nationality: z.string().nonempty('Please select your nationality'),
+    nationality: z.string().refine(value => value !== "", {
+        message: 'Please select your nationality',
+    }),
     contact_number: z.string().nonempty('Please provide a contact number'),
     from_date: z.string().nonempty('Please select a start date'),
     to_date: z.string().nonempty('Please select an end date'),

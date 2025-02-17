@@ -1,10 +1,9 @@
 // src/app/home/ClientLayout.js
 "use client";
 
-import Footer from "@/components/Footer";
-import Header from "@/components/header";
+import Footer from "@/components/shared/Footer";
+import Header from "@/components/shared/header";
 import { usePathname } from "next/navigation";
-
 
 export default function ClientLayout({ token, currentUser, children }) {
   const pathname = usePathname();

@@ -1,0 +1,127 @@
+/*--------------------------------------------------------------
+>>> Inner Banner  
+----------------------------------------------------------------*/
+
+
+@media screen and (max-width: 575px) {
+  .inner-banner-wrap {
+    padding-bottom: 0;
+  }
+
+}
+
+.inner-shape {
+  background-image: url(/images/slider-pattern.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  content: "";
+  height: 150px;
+  width: 100%;
+  margin-top: -100px;
+  position: relative;
+}
+
+@media screen and (max-width: 991px) {
+
+  .inner-shape {
+    height: 105px;
+  }
+
+}
+
+.inner-banner-gray {
+  background-color: #fafafa;
+}
+
+.inner-banner-gray .inner-shape {
+  background-image: url(/images/slider-pattern.png);
+}
+
+.inner-baner-container {
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  height: 80vh;
+  text-align: center;
+  position: relative;
+}
+
+.inner-baner-container:before {
+  background-color: #151515;
+  content: "";
+  display: block;
+  opacity: 0.65;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+}
+
+.inner-baner-container .inner-banner-content {
+  position: relative;
+  color: #ffffff;
+}
+
+.inner-baner-container .inner-title {
+  color: #ffffff;
+  line-height: 1.1;
+  /* text-align: center; */
+  margin-top: 13.5rem;
+}
+
+.inner-baner-container .breadcrumb {
+  background-color: transparent;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  justify-content: center;
+  -ms-flex-pack: center;
+  margin: 0;
+  padding: 0;
+}
+
+.inner-baner-container .breadcrumb li {
+  color: #ffffff;
+  font-size: 14px;
+}
+
+.inner-baner-container .breadcrumb li:before {
+  color: inherit;
+}
+
+.inner-baner-container .breadcrumb li a {
+  color: #ffffff;
+}
+
+.inner-baner-container .breadcrumb li a:hover {
+  color: #2c75ba;
+}
+
+.inner-baner-container .breadcrumb li.active {
+  color: #b3b3b3;
+}
+
+.inner-baner-container .breadcrumb-content {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 20px;
+}
+
+@media screen and (max-width: 575px) {
+  .inner-baner-container {
+    height: 60vh !important;
+    margin-bottom: 1%;
+  }
+
+  .inner-baner-container .inner-title {
+    font-size: 30px;
+  }
+
+  .inner-baner-container .inner-banner-content p {
+    font-size: 15px;
+  }
+}

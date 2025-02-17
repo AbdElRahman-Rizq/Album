@@ -1,31 +1,41 @@
  /* login form css -------------------------------------  */
  .login-page {
-     background-size: cover;
-     background-position: center center;
-     background-repeat: no-repeat;
-     display: -webkit-box;
-     display: -moz-box;
-     display: -ms-flexbox;
-     display: -webkit-flex;
      display: flex;
-     -webkit-align-items: center;
-     -moz-align-items: center;
-     -ms-align-items: center;
-     -ms-flex-align: center;
-     align-items: center;
-     -webkit-justify-content: center;
-     -moz-justify-content: center;
-     -ms-justify-content: center;
-     justify-content: center;
-     -ms-flex-pack: center;
+     min-height: 100vh;
+     background: none;
+     width: 100%;
+     position: relative;
+ }
+
+ .login-page::before {
+     content: '';
+     position: absolute;
+     right: 0;
+     top: 0;
+     width: 60%;
+     height: 100%;
+     background-image: var(--bg-image);
+     background-size: cover;
+     background-position: center;
+     background-repeat: no-repeat;
+     transition: all 0.3s ease;
  }
 
  .login-page .button-primary {
-     padding: .6rem .8rem;
+     padding: .8rem;
      text-align: center;
      border-radius: .5rem;
      border: 0;
+     background-color: #dc2626;
+     color: white;
+     font-weight: 600;
+     width: 100%;
+     cursor: pointer;
+     transition: background-color 0.3s ease;
+ }
 
+ .login-page .button-primary:hover {
+     background-color: #b91c1c;
  }
 
  @media screen and (min-width: 992px) {
@@ -35,59 +45,180 @@
  }
 
  .login-page .site-title {
-     text-align: center;
+     text-align: left;
+     margin-bottom: 2rem;
  }
 
  .login-page .site-title img {
-     max-width: 190px;
-     margin: auto;
+     max-width: 120px;
  }
 
  .login-page .login-from-wrap {
+     width: 40%;
+     padding: 2rem 4rem;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
      position: relative;
-     width: 400px;
-     max-width: 100%;
-     margin: 30px auto;
-     background: #fff !important;
-     padding: 40px;
-     border-radius: 6px;
-     box-shadow: 0px 0px 50px 2px rgba(0, 0, 0, 0.51);
+     z-index: 2;
+     background: #fff;
  }
 
- .login-page .login-from-wrap .button-primary {
-     display: block;
-     margin-top: 25px;
-     text-align: center;
+ .login-page .login-from-wrap h2 {
+     font-size: 2rem;
+     font-weight: 600;
+     margin-bottom: 1rem;
  }
 
- .login-page .login-from-wrap .for-pass {
+ .login-page .login-from-wrap p {
+     color: #666;
+     margin-bottom: 2rem;
+ }
+
+ .login-page .login-from-wrap form {
+     max-width: 400px;
+     width: 100%;
+     margin: 0 auto;
+ }
+
+ .login-page .login-from-wrap .TextController {
+     margin-bottom: 1.5rem;
+ }
+
+ .login-page .login-from-wrap .TextController label {
      display: block;
-     text-align: right;
-     /* padding-top: 15px; */
-     font-size: 15px;
-     font-weight: 700;
+     margin-bottom: 0.5rem;
+     font-weight: 500;
+     color: #374151;
+ }
+
+ .login-page .login-from-wrap .TextController input {
+     width: 100%;
+     padding: 0.75rem;
+     border: 1px solid #d1d5db;
+     border-radius: 0.5rem;
+     font-size: 1rem;
+ }
+
+ .login-page .login-from-wrap .TextController input:focus {
+     outline: none;
+     border-color: #dc2626;
+     box-shadow: 0 0 0 1px #dc2626;
  }
 
  .login-page .login-from-wrap .swap-login-signup {
      text-align: center;
-     color: var(--main-color);
-     margin-top: 20px;
+     margin-top: 1.5rem;
+     color: #4b5563;
  }
 
- .login-page .login-from-wrap .swap-login-signup>* {
-     font-weight: bold;
+ .login-page .login-from-wrap .swap-login-signup a {
+     color: #dc2626;
+     font-weight: 600;
+     text-decoration: none;
  }
 
- .login-page .login-from-wrap .swap-login-signup>*:hover {
+ .login-page .login-from-wrap .swap-login-signup a:hover {
      text-decoration: underline;
  }
 
- @media screen and (max-width: 575px) {
+ /* Hide mobile title and description on desktop */
+ .login-page h2.mobile-title,
+ .login-page p.mobile-description {
+     display: none;
+ }
+
+ @media screen and (max-width: 768px) {
      .login-page {
-         padding: 30px;
+         min-height: 100vh;
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         justify-content: flex-start;
+         padding: 1rem;
+         background: none;
+     }
+
+     .login-page::before {
+         width: 100%;
+         height: 100%;
+         opacity: 1;
+         z-index: 1;
      }
 
      .login-page .login-from-wrap {
-         padding: 15px 15px 30px;
+         width: 100%;
+         max-width: 450px;
+         margin: 0 auto;
+         margin-top: 2rem;
+         padding: 2rem;
+         height: auto;
+         max-height: calc(100vh - 8rem);
+         border-radius: 1.5rem;
+         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+         z-index: 2;
+         background: rgba(255, 255, 255, 0.95);
+         backdrop-filter: blur(10px);
+         overflow-y: scroll;
+         -ms-overflow-style: none;
+         /* IE and Edge */
+         scrollbar-width: none;
+         /* Firefox */
+     }
+
+     .login-page .login-from-wrap::-webkit-scrollbar {
+         display: none;
+         /* Chrome, Safari and Opera */
+     }
+
+     .hide-on-mobile {
+         display: none !important;
+     }
+
+     .login-page h2.mobile-title {
+         color: white;
+         font-size: 2rem;
+         font-weight: 600;
+         text-align: center;
+         margin-top: 2rem;
+         z-index: 2;
+         text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+     }
+
+     .login-page p.mobile-description {
+         color: white;
+         text-align: center;
+         margin-top: 0.5rem;
+         z-index: 2;
+         text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+         padding: 0 1rem;
+     }
+
+
+     /* Adjust home button for mobile */
+     .login-page .button-primary[style*="position: absolute"] {
+         top: 1rem;
+         right: 1rem;
+         margin: 0;
+         padding: 0.5rem 1rem;
+         font-size: 0.9rem;
+         z-index: 3;
+         max-height: 1rem;
+         background: rgba(255, 255, 255, 0.9);
+         color: #dc2626;
+         backdrop-filter: blur(10px);
+         border: 1px solid rgba(220, 38, 38, 0.2);
+     }
+ }
+
+ @media screen and (max-width: 480px) {
+     .login-page {
+         padding: 0.75rem;
+     }
+
+     .login-page .login-from-wrap {
+         padding: 1.5rem;
+         margin-top: 5rem;
+         max-height: calc(100vh - 7rem);
      }
  }

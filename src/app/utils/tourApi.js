@@ -1,8 +1,6 @@
 import { api_url } from "@/constants/base_url";
 import axios from "axios";
 
-
-
 // Create a custom axios instance with default configs
 const apiClient = axios.create({
   baseURL: api_url,
@@ -25,8 +23,6 @@ export async function fetchBlogs() {
 
 export async function fetchTourDetails(slug, language) {
   try {
-
-
     // Validate slug
     if (!slug || slug === 'undefined') {
       throw new Error("Invalid tour Slug");
@@ -34,7 +30,6 @@ export async function fetchTourDetails(slug, language) {
 
     // Safely get cookies
     let token = null;
-
 
     const headers = {
       ...(token ? { Authorization: `Bearer ${token}` } : {}),
@@ -51,16 +46,21 @@ export async function fetchTourDetails(slug, language) {
       apiClient.get(`tourDay/${tourData?.id}`, { headers }),
       apiClient.get(`tourPricing/${tourData?.id}`, { headers }),
       tourData?.blogId
-        ? apiClient.get(`blog/show?Blogid=${tourData.blogId}&language=${language?.name || "en"}`, { headers })
+        ? apiClient.get(`blog/show?Blogid=${tourData.blogId}&language=${language?.name || "EN"}`, { headers })
         : Promise.resolve(null)
     ];
-
 
     const [
       tourDaysResponse,
       pricingResponse,
       blogResponse
     ] = await Promise.allSettled(requests);
+
+    // Fetch blogs to filter by blogId
+    const blogs = await fetchBlogs();
+
+    // Filter the blog to get the languageId based on tourData.blogId
+    const languageId = blogs?.find(blog => blog.blogId === tourData.blogId && blog.language === language?.name)?._id;
 
     // Safely extract tour days data
     let tourDaysData = [];
@@ -86,6 +86,11 @@ export async function fetchTourDetails(slug, language) {
           pricingResponse.value.data?.data ||
           pricingResponse.value?.data ||
           [];
+
+        // Filter pricing data based on the languageId
+        if (languageId) {
+          pricingData = pricingData.filter(price => price.language === languageId);
+        }
       } catch (error) {
         console.error("Error parsing pricing response:", error);
       }
@@ -93,11 +98,10 @@ export async function fetchTourDetails(slug, language) {
       console.error("Pricing request failed:", pricingResponse.reason);
     }
 
-    // Fetch blogs to filter by blogId
-    const blogs = await fetchBlogs();
-
-    // Filter the blog to get the languageId based on tourData.blogId
-    const languageId = blogs?.find(blog => blog.blogId === tourData.blogId)?._id;
+    // Filter tour days based on the languageId
+    if (languageId) {
+      tourDaysData = tourDaysData.filter(day => day.language === languageId);
+    }
 
     // Additional request for subCard, only if languageId exists
     let subCardResponse = null;

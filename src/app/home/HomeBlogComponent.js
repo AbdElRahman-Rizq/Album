@@ -4,15 +4,14 @@ import Image from "next/image";
 import Link from "next/link";
 
 import HomeSliderSection from "@/components/slider/HomeSliderSection";
-import SectionHeading from "@/components/SectionHeading";
-import PackageCard from "@/components/PackageCard";
-import CustomButton from "@/components/CustomButton";
-import TopNotchDeals from "@/components/TopNotchDeals";
-import CallbackSection from "@/components/CallbackSection";
-import AdventureAndActivity from "@/components/AdventureAndActivity";
-import SpecialTravelOffer from "@/components/SpecialTravelOffer";
-import ClientSection from "@/components/ClientSection";
-import TestimonialSection from "@/components/TestimonialSection";
+import SectionHeading from "@/components/sectionHeading/SectionHeading";
+import PackageCard from "@/components/PackageCard/PackageCard";
+import TopNotchDeals from "@/components/TopNotch/TopNotchDeals";
+// import CallbackSection from "@/components/CallbackSection/CallbackSection";
+import SpecialTravelOffer from "@/components/SpecialTravel/SpecialTravelOffer";
+import ClientSection from "@/components/ClientSection/ClientSection";
+import CallbackSection from "@/components/CallBackSection/CallbackSection";
+
 import Loading from "@/components/shared/Loading/Loading";
 
 // Import images
@@ -24,12 +23,15 @@ import img13 from "@/assets/images/img13.jpg";
 import img14 from "@/assets/images/img14.jpg";
 import img15 from "@/assets/images/img15.jpg";
 import img24 from "@/assets/images/img24.jpg";
-import SubscribeSection from "@/components/SubscribeSection";
+import SubscribeSection from "@/components/SubscribeSection/SubscribeSection";
 import { ADDRESS, INFO_MAILE, PHONE1 } from "@/constants/globals";
 import { api_url } from "@/constants/base_url";
 import WhatsAppButton from "@/components/shared/WhatsAppButton";
 import { useHomeBlog } from "@/providers/HomeBlogContext";
 import { fetchTours } from "@/utils/homeApi";
+import AdventureAndActivity from "@/components/AdventureandActivity/AdventureAndActivity";
+import CustomBtn from "@/components/customBtn/CustomBtn";
+import TestimonialSection from "@/components/shared/TestimonialSection";
 
 const HomeBlogComponent = () => {
   const [tours, setTours] = useState([]);
@@ -42,7 +44,7 @@ const HomeBlogComponent = () => {
     };
     loadTours();
   }, [lang]);
-  console.log("tours:   ", tours);
+
 
 
 
@@ -81,7 +83,7 @@ const HomeBlogComponent = () => {
                     image={item.image}
                     title={item.title}
                     description={item.description}
-                    id={item?.id}
+                    id={item?.slug}
                     isLoading={isBlogLoading}
                     api_url={api_url}
                   />
@@ -90,10 +92,10 @@ const HomeBlogComponent = () => {
             </div>
 
             {!isBlogLoading && (
-              <CustomButton href={"/tours"}>
+              <CustomBtn href={"/tours"}>
                 {blog?.sub_card_2?.content?.split("-.-")[2] ||
                   "VIEW ALL PACKAGES"}
-              </CustomButton>
+              </CustomBtn>
             )}
           </div>
         </div>
@@ -329,7 +331,15 @@ const HomeBlogComponent = () => {
                     {blog?.sub_card_10?.title ||
                       "LET'S JOIN US FOR MORE UPDATE !!"}
                   </h3>
-                  <Link href="/contact" className="button-primary">
+                  <Link
+                    href="/contact"
+                    className="button-primary"
+                    style={{
+                      color: "#fff",
+                      padding: ".5rem 1rem",
+                      borderRadius: ".5rem",
+                    }}
+                  >
                     {blog?.sub_card_10?.content?.split("-.-")?.[2] ||
                       "LEARN MORE"}
                   </Link>

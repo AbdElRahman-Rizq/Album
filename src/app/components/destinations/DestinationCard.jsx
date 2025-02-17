@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
+import "../../home/home.css";
 
 const DestinationCard = ({ imgSrc, title, desc, id, slug }) => {
   return (
@@ -16,18 +17,35 @@ const DestinationCard = ({ imgSrc, title, desc, id, slug }) => {
               style={{ objectFit: "cover" }}
               priority
             />
+            <div style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              backgroundColor: 'rgba(0,0,0,0.35)', // Semi-transparent black overlay
+              zIndex: 1
+            }}></div>
           </div>
         </figure>
         <div className="meta-cat bg-meta-cat">
           <div className="desti-content">
             <h3>
-              <Link href={`/tours/destination/${slug}`}>{title}</Link>
+              <Link href={`/tours/destination/${slug}`} style={{ color: 'white' }}>{title}</Link>
             </h3>
-            <p>{desc}</p>
+            <p style={{ color: 'white' }}>{desc}</p>
           </div>
           <p>
             {" "}
-            <Link className="text-white" href={`/tours/destination/${slug}`}>
+            <Link 
+              className="text-white" 
+              href={`/tours/destination/${slug}`}
+              style={{ 
+                color: 'white', 
+                textDecoration: 'underline', 
+                
+              }}
+            >
               See rewards
             </Link>
           </p>

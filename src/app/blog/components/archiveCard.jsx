@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Modal from "@/components/shared/Modal";
 import Image from "next/image";
+import { api_url } from "@/constants/base_url";
 
 const ArchiveCard = ({
   slug,
@@ -45,11 +46,12 @@ const ArchiveCard = ({
   return (
     <>
       <article className="post">
-        <figure className="feature-image">
-          <a>
+        <figure className="feature-image" style={{ cursor: "pointer" }}>
+          <a onClick={handleClick} >
             {imgSrc ? (
               <Image
-                src={imgSrc}
+
+                src={`${api_url}${imgSrc}`.replace("/api/", "/storage/")}
                 alt={title || "Blog image"}
                 width={200}
                 height={200}
@@ -72,8 +74,8 @@ const ArchiveCard = ({
           </a>
         </figure>
         <div className="entry-content">
-          <h3>
-            <a onClick={handleClick} style={{ cursor: "pointer" }}>
+          <h3 style={{ cursor: "pointer" }}>
+            <a onClick={handleClick} >
               {title}
             </a>
           </h3>

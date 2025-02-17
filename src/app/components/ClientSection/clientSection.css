@@ -1,0 +1,28 @@
+
+/*--------------------------------------------------------------
+>>> Home travel client section  
+----------------------------------------------------------------*/
+.client-section {
+    position: relative;
+    z-index: 5;
+    top: 3rem;
+  }
+  
+  .client-wrap {
+    padding: 28px 0;
+    border-radius: .3rem;
+  }
+  
+  .client-wrap .client-item {
+    padding: 10px 35px;
+    text-align: center;
+    background-color: #0791be;
+  }
+  
+  @media screen and (max-width: 575px) {
+    .client-wrap .client-item {
+      padding: 10px 20px;
+      text-align: center;
+    }
+  }
+  

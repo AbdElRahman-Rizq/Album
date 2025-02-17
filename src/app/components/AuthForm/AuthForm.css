@@ -1,0 +1,266 @@
+.TextController {
+    margin-bottom: 1.5rem;
+}
+
+.input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-icon {
+    position: absolute;
+    left: .4rem;
+    color: #6b7280;
+    font-size: 1.2rem;
+    z-index: 1;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+}
+
+.input-container input {
+    width: 100%;
+    padding: 0.875rem .2rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    transition: all 0.2s;
+    background: transparent;
+}
+
+.login-page .login-from-wrap .TextController input {
+    padding-left: 2rem
+}
+
+.input-container input:focus {
+    outline: none;
+    border-color: #dc2626;
+    box-shadow: 0 0 0 1px #dc2626;
+}
+
+.input-container input::placeholder {
+    color: #9ca3af;
+    font-size: 0.95rem;
+
+}
+
+.show-hide-button {
+    position: absolute;
+    right: 1rem;
+    background: none;
+    border: none;
+    color: #6b7280;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.show-hide-button:hover {
+    color: #374151;
+}
+
+.error-message {
+    color: #dc2626;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+}
+
+.country-select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    background-color: white;
+    cursor: pointer;
+}
+
+.country-select:focus {
+    outline: none;
+    border-color: #dc2626;
+    box-shadow: 0 0 0 1px #dc2626;
+}
+
+.login-from-wrap .button-primary {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #dc2626;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.login-from-wrap .button-primary:hover {
+    background-color: #b91c1c;
+}
+
+.login-from-wrap .button-primary:disabled {
+    background-color: #9ca3af;
+    cursor: not-allowed;
+}
+
+.google-button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #f3f4f6;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.google-button:hover {
+    background-color: #e5e7eb;
+}
+
+.google-button svg {
+    font-size: 1.5rem;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 1.5rem 0;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #d1d5db;
+}
+
+.divider span {
+    padding: 0 1rem;
+    color: #6b7280;
+    font-size: 0.875rem;
+}
+
+/* Country Select Styles */
+.country-select-container {
+    position: relative;
+    width: 100%;
+}
+
+.country-select-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    margin-right: .5rem;
+    padding: 0.875rem 1rem;
+    background: transparent;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.2s;
+    height: 49px;
+    color: #374151;
+}
+
+.country-select-button .country-code {
+    font-size: 1rem;
+    color: #374151;
+}
+
+.country-dropdown {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 0;
+    width: 300px;
+    max-height: 400px;
+    background: white;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    z-index: 50;
+    overflow: hidden;
+}
+
+.country-list {
+    overflow-y: auto;
+    max-height: 350px;
+    height: 100%;
+}
+
+.country-search {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: none;
+    border-bottom: 1px solid #d1d5db;
+    border-radius: 0.5rem 0.5rem 0 0;
+    font-size: 0.875rem;
+    background: transparent;
+}
+
+.country-option {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    text-align: left;
+    font-size: 0.875rem;
+}
+
+.country-option:hover {
+    background: #f3f4f6;
+}
+
+.country-option .country-flag {
+    font-size: 1.2rem;
+}
+
+.country-option .country-name {
+    flex: 1;
+    color: #374151;
+}
+
+.country-option .country-code {
+    color: #6b7280;
+}
+
+@media screen and (max-width: 768px) {
+    .country-dropdown {
+        width: 100%;
+        max-width: 100%;
+        max-height: 200px;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    .country-list {
+        max-height: 150px;
+    }
+    
+    .country-option {
+        padding: 0.625rem 0.75rem;
+        font-size: 0.875rem;
+    }
+    
+    .country-search {
+        padding: 0.625rem 0.75rem;
+        background: white;
+    }
+
+    .country-option .country-name {
+        font-size: 0.875rem;
+    }
+}

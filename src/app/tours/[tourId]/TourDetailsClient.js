@@ -6,16 +6,18 @@ import {
   IoHourglassOutline,
   IoEarth,
   IoPeople,
-  IoCalendarOutline
+  IoCalendarOutline,
+  IoCheckmarkCircleOutline,
+  IoCloseCircleOutline
 } from 'react-icons/io5';
 import Loading from '@/components/shared/Loading/Loading';
 import style from './TourDetails.module.css';
 import Modal from '@/components/shared/Modal/Modal';
-import BookingForm from '@/components/BookingForm';
+import BookingForm from '@/components/BookingForm/BookingForm';
 import ImagesSlider from '@/components/shared/ImagesSlider';
 import { api_url } from '@/constants/base_url';
-import ItineraryCard from '../../../components/TourDetailsComponents/ItineraryCard/ItineraryCard';
-import PricesCard from '../../../components/TourDetailsComponents/PricesCard/PricesCard';
+import ItineraryCard from '../../components/TourDetailsComponents/ItineraryCard/ItineraryCard';
+import PricesCard from '../../components/TourDetailsComponents/PricesCard/PricesCard';
 import { useLanguage } from "@/providers/LanguageContext";
 import { fetchTourDetails, fetchBlogs } from '@/utils/tourApi';
 import { useHomeBlog } from '@/providers/HomeBlogContext';
@@ -30,7 +32,7 @@ const TourDetailsClient = ({ slug }) => {
   const [cardData, setCardData] = useState(null);
   const [cabinData, setCabinData] = useState(null);
   const { lang } = useHomeBlog();
-  console.log("logsss", lang);
+
 
 
 
@@ -65,7 +67,7 @@ const TourDetailsClient = ({ slug }) => {
   useEffect(() => {
     if (tourDetails?.subCard) {
       try {
-        console.log("rizq: ", tourDetails.subCard);
+
 
         const subCardData = typeof tourDetails.subCard == 'string'
           ? JSON.parse(tourDetails.subCard)
@@ -91,7 +93,7 @@ const TourDetailsClient = ({ slug }) => {
             setCurrentImage(value.image[0]);
           }
 
-          if (key.startsWith("sub_") && value?.title === "overview") {
+          if (key.startsWith("sub_") && value?.title.toLowerCase() === "overview") {
             setOverviewCard(typeof value.content === 'string'
               ? JSON.parse(value.content)
               : value.content);
@@ -113,13 +115,14 @@ const TourDetailsClient = ({ slug }) => {
         console.error("Error parsing subCard:", error);
       }
     }
-    console.log("Gallery: ", gallery);
 
   }, [tourDetails]);
 
   // Handle loading and error states
   if (isLoading) {
-    return <Loading />;
+    return <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', margin: '0 auto' }}>
+      <Loading color={'#1e3a8a'} />
+    </div>
   }
 
   if (error || !tourDetails?.tour) {
@@ -142,8 +145,8 @@ const TourDetailsClient = ({ slug }) => {
       <h1>{tour?.title}</h1>
       <div className={style.details}>
         <div className={style.leftSection}>
+            {gallery?.image && (
           <div className={style.images}>
-            {gallery?.image ? (
               <>
                 <div
                   style={{
@@ -184,49 +187,48 @@ const TourDetailsClient = ({ slug }) => {
                   </div>
                 )}
               </>
-            ) : (
-              <div>No images available</div>
-            )}
+            
           </div>
+        )}
 
-          <div className={style.overview}>
-            <h2>Overview</h2>
-            {overviewCard ? (
-              <>
-                <div>
-                  <OverviewCard
-                    icon={<IoHourglassOutline />}
-                    text="Schedule"
-                    subText={overviewCard?.scheduleDays}
-                    details={overviewCard?.scheduleNights}
-                  />
-                  <OverviewCard
-                    icon={<IoEarth />}
-                    text="Countries"
-                    subText={overviewCard?.numberOfCountries}
-                    details={overviewCard?.numberOfCities}
-                  />
-                  <OverviewCard
-                    icon={<IoPeople />}
-                    text="Type"
-                    subText="Small group tour"
-                    details={`${overviewCard?.numberOfPersons || 0} Persons`}
-                  />
-                  <OverviewCard
-                    icon={<IoCalendarOutline />}
-                    text="Run"
-                    subText={overviewCard?.tourRunFrom}
-                    details={overviewCard?.tourRunTo}
-                  />
-                </div>
-                <p>{overviewCard?.overviewDescription}</p>
-              </>
-            ) : (
-              <p>No overview available</p>
-            )}
-          </div>
+          {overviewCard && (
+
+            <div className={style.overview}>
+              <h2>Overview</h2>
+              <div>
+                <OverviewCard
+                  icon={<IoHourglassOutline />}
+                  text="Schedule"
+                  subText={overviewCard?.scheduleDays}
+                  details={overviewCard?.scheduleNights}
+                />
+                <OverviewCard
+                  icon={<IoEarth />}
+                  text="Countries"
+                  subText={overviewCard?.numberOfCountries}
+                  details={overviewCard?.numberOfCities}
+                />
+                <OverviewCard
+                  icon={<IoPeople />}
+                  text="Type"
+                  subText="Small group tour"
+                  details={`${overviewCard?.numberOfPersons || 0} Persons`}
+                />
+                <OverviewCard
+                  icon={<IoCalendarOutline />}
+                  text="Run"
+                  subText={overviewCard?.tourRunFrom}
+                  details={overviewCard?.tourRunTo}
+                />
+              </div>
+              <p>{overviewCard?.overviewDescription}</p>
+
+            </div>
+
+
+
+          )}
         </div>
-
         <div
           id="bookForm"
           className={style.rightSection}
@@ -234,61 +236,65 @@ const TourDetailsClient = ({ slug }) => {
           <BookingForm
             title={tour?.title}
             tourId={tour?.id}
+            requireLogin={true}
           />
         </div>
       </div>
+      {includeExclude?.included && includeExclude.included.length > 0 && (
+        <div className={style.includeExclude}>
+          <div className={style.include}>
+            <h3>Included</h3>
+            <ul>
+              {includeExclude?.included && includeExclude.included.length > 0 && (
+                includeExclude.included.map((item, index) => (
+                  <li key={index}>
+                    <IoCheckmarkCircleOutline style={{ color: 'var(--green)', marginRight: '10px' }} />
+                    {item}
+                  </li>
+                ))
+              )}
+            </ul>
+          </div>
+          <div className={style.exclude}>
+            <h3>Exclude</h3>
+            <ul>
+              {includeExclude?.excluded && includeExclude?.excluded.length > 0 && (
+                includeExclude?.excluded?.map((item, index) => (
+                  <li key={index}>
+                    <IoCloseCircleOutline style={{ color: 'var(--main-color)', marginRight: '10px' }} />
+                    {item}
+                  </li>
+                ))
 
-      <div className={style.includeExclude}>
-        <div className={style.include}>
-          <h3>Included</h3>
+              )}
+            </ul>
+          </div>
+        </div>
+      )}
+      {includeExclude?.NB && includeExclude.NB.length > 0 && (
+        <div className={style.nbSection}>
+          <h3>N.B.:</h3>
           <ul>
-            {includeExclude?.included && includeExclude.included.length > 0 ? (
-              includeExclude.included.map((item, index) => (
+            {includeExclude?.NB && includeExclude.NB.length > 0 && (
+              includeExclude?.NB.map((item, index) => (
                 <li key={index}>{item}</li>
               ))
-            ) : (
-              <li>No included services available.</li>
             )}
+
           </ul>
         </div>
-        <div className={style.exclude}>
-          <h3>Exclude</h3>
-          <ul>
-            {includeExclude?.excluded && includeExclude?.excluded.length > 0 ? (
-              includeExclude?.excluded?.map((item, index) => (
-                <li key={index}>{item}</li>
-              ))
-            ) : (
-              <li>No excluded services available.</li>
-            )}
-          </ul>
-        </div>
-      </div>
+      )}
 
-      <div className={style.nbSection}>
-        <h3>N.B.:</h3>
-        <ul>
-          {includeExclude?.NB && includeExclude.NB.length > 0 ? (
-            includeExclude?.NB.map((item, index) => (
-              <li key={index}>{item}</li>
-            ))
-          ) : (
-            <li>No notes available.</li>
-          )}
-        </ul>
-      </div>
-
-      <div className={style.page}>
-        {tourDays && tourDays.length > 0 ? (
+      {tourDays && tourDays.length > 0 && (
+        <div className={style.page}>
           <ItineraryCard itinerary={tourDays} />
-        ) : (
-          <div>No itinerary available</div>
-        )}
-      </div>
 
-      {cardData ? (
+        </div>
+      )}
+
+      {/* {cardData ? (
         <div className={style.cruise}>
-          <h2>Cruise</h2>
+          <h2 style={{ marginTop: "1rem" }}>Cruise</h2>
           <p>{cardData?.description}</p>
           <h4>Number of Rooms</h4>
           <ul>
@@ -306,9 +312,9 @@ const TourDetailsClient = ({ slug }) => {
           <h2>Cruise</h2>
           <p>No cruise details available</p>
         </div>
-      )}
+      )} */}
 
-      {cabinData?.newCabin ? (
+      {/* {cabinData?.newCabin ? (
         <div className={style.cabin}>
           <h2>Cabin</h2>
           <ul>
@@ -326,20 +332,21 @@ const TourDetailsClient = ({ slug }) => {
           <h2>Cabin</h2>
           <p>No cabin details available</p>
         </div>
-      )}
+      )} */}
 
-      <div className={style.prices}>
-        <h2>Prices</h2>
-        <div className={style.PricesCardsContainer}>
-          {pricing && pricing.length > 0 ? (
-            pricing.map((priceCard) => (
-              <PricesCard key={priceCard.id} priceCard={priceCard} />
-            ))
-          ) : (
-            <div>No pricing information available.</div>
-          )}
+      {pricing && pricing.length > 0 && (
+        <div className={style.prices}>
+          <h2>Prices</h2>
+          <div className={style.PricesCardsContainer}>
+            {pricing && pricing.length > 0 && (
+              pricing.map((priceCard) => (
+                <PricesCard key={priceCard.id} priceCard={priceCard} />
+              ))
+
+            )}
+          </div>
         </div>
-      </div>
+      )}
 
       <div className={style.reviews}>
         {/* Future reviews section */}

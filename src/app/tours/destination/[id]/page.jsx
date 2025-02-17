@@ -1,11 +1,12 @@
 import Loading from "@/components/shared/Loading/Loading";
 import axios from "axios";
 import { cookies } from "next/headers";
-import IneerBanner from "@/components/IneerBanner";
+import IneerBanner from "@/components/IneerBanner/IneerBanner";
 import { api_url } from "@/constants/base_url";
 import { redirect } from "next/navigation";
-import ActivitySection from "../../../../components/ActivityComponents/ActivitySection";
-import PackageWrap from "../../../../components/ToursComponents/PackageWrap";
+import ActivitySection from "../../../components/ActivityComponents/ActivitySection";
+import PackageWrap from "@/tours/ToursComponents/PackageWrap";
+
 
 export default async function DestinationPage({ params }) {
   const { id } = await params;

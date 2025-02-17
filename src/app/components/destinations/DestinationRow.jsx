@@ -2,9 +2,10 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import DestinationCard from "./DestinationCard";
-import CustomButton from "../CustomButton";
 import { api_url } from "@/constants/base_url";
-import { getTokenFromCookies } from "../../../utils/cookieUtils";
+import { getTokenFromCookies } from "../../utils/cookieUtils";
+import CustomBtn from "../customBtn/CustomBtn";
+
 
 const DestinationRow = ({ btnText }) => {
   const { data } = useQuery({
@@ -34,9 +35,9 @@ const DestinationRow = ({ btnText }) => {
           />
         ))}
       </div>
-      <CustomButton href="/destination">
+      <CustomBtn href="/destination">
         {btnText || "MORE DESTINATION"}
-      </CustomButton>
+      </CustomBtn>
     </div>
   );
 };

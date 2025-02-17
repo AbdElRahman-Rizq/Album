@@ -1,27 +1,25 @@
-import ActivitySection from "../../components/ActivityComponents/ActivitySection";
-import IneerBanner from "../../components/IneerBanner";
-import PackageSection from "../../components/ToursComponents/PackageSectionServer";
+import ActivitySection from "../components/ActivityComponents/ActivitySection";
+import IneerBanner from "../components/IneerBanner/IneerBanner";
+
 
 import axios from "axios";
 import { api_url } from "@/constants/base_url";
 import Head from "next/head";
+import PackageSection from "./ToursComponents/PackageSection";
 
 
-export const dynamic = "force-dynamic"; // Ensure SSR for every request
+export const dynamic = "force-dynamic";
 
 export default async function ToursPage() {
-  const { data } = await axios.get(`${api_url}page/tour`); // Fetch data directly
-
-  const metaTitle = data?.title || "Tour Packages"; // Set meta title
-  const metaDescription = data?.description || "Explore our tour packages."; // Set meta description
-  console.log("title: ", metaTitle);
-
   return (
     <>
       <Head>
-        <title>{metaTitle}</title>
-        <meta name="description" content={metaDescription} />
+        <title>Tour Packages</title>
+        <meta name="Tours" content="Discover our amazing tour packages and activities" />
+        <meta name="keywords" content="tours, travel, packages, activities" />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
+
       <main id="content" className="site-main">
         <IneerBanner bannerName={"Tour Packages"} />
         <PackageSection />

@@ -11,6 +11,8 @@ const HomeBlogContext = createContext();
 export const useHomeBlog = () => useContext(HomeBlogContext);
 
 export const HomeBlogProvider = ({ children }) => {
+  
+
   const queryClient = useQueryClient();
   const [langs, setLangs] = useState([]);
   const [lang, setLang] = useState(() => {
@@ -82,7 +84,7 @@ export const HomeBlogProvider = ({ children }) => {
   } = useQuery({
     queryKey: ["homeBlog", lang],
     queryFn: () =>
-      axios.get(`${api_url}home/${lang?.name}`, {
+      axios.get(`${api_url}home/${lang?.name || "EN"}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${Cookies.get("album-token")}`,
@@ -146,7 +148,7 @@ export const HomeBlogProvider = ({ children }) => {
         .map((item) => {
           return { name: item, id: data?.data?.data?.[item] };
         })
-        .sort((a, b) => (a.name === "en" ? -1 : b.name === "en" ? 1 : 0));
+        .sort((a, b) => (a.name === "EN" ? -1 : b.name === "EN" ? 1 : 0));
       setLangs(allLangs);
       setLang({
         name: allLangs[0]?.name,

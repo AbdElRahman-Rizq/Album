@@ -1,5 +1,192 @@
 .custom-button .button-primary {
-    padding: 0.6rem 0.8rem;
-    border-radius: 0.2rem;
+  padding: 0.9rem 0.8rem;
+  border-radius: 0.3rem;
+  color: #ffffff;
+}
 
+
+
+
+/*--------------------------------------------------------------
+>>> Home travel destination section  
+----------------------------------------------------------------*/
+.destination-section {
+  padding: 2.5rem 0;
+}
+
+@media screen and (min-width: 992px) {
+  .destination-section {
+    margin-bottom: 0;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .destination-section {
+    padding-bottom: 60px;
+  }
+}
+
+.destination-three-column .row .row {
+  margin: 0;
+}
+
+.destination-three-column .row .row [class*="col-"] {
+  padding: 7px;
+}
+
+.destination-three-column>.row {
+  margin: 0 -7px;
+}
+
+.home .destination-three-column>.row>[class*="col-"] {
+  padding: 0;
+  max-height: 450px;
+}
+
+.destination-three-column>.row>[class*="col-"] {
+  padding: 0;
+}
+
+.destination-four-column .row {
+  margin: 0 -7px;
+}
+
+.destination-four-column .row [class*="col-"] {
+  padding: 7px;
+}
+
+.meta-cat {
+  z-index: 2 !important;
+}
+
+.overlay-desti-item .desti-content h3,
+.overlay-desti-item .desti-content p {
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+
+.overlay-desti-item .desti-content h3 a:hover {
+  color: #d51c29;
+}
+
+.desti-item {
+  background-color: #ffffff;
+  box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  padding: 8px;
+  position: relative;
+  height: 100%;
+}
+
+.desti-item .desti-image {
+  position: relative;
+  height: 100%;
+}
+
+.desti-item .desti-image img {
+  height: 100%;
+  width: 100%;
+}
+
+.desti-item .desti-image:before {
+  background-color: #630d0599;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  /* bottom: 0; */
+  width: 100%;
+  /* height: 100%; */
+  opacity: 0.45;
+}
+
+.desti-item .desti-image .rating-start {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+}
+
+.desti-item .meta-cat p {
+  display: inline-block;
+  font-family: "Raleway", Sans-serif;
+  font-weight: 700;
+  line-height: 1.2;
+  text-transform: uppercase;
+  -webkit-transition: background-color 0.3s;
+  -moz-transition: background-color 0.3s;
+  -ms-transition: background-color 0.3s;
+  -o-transition: background-color 0.3s;
+  transition: background-color 0.3s;
+}
+
+.desti-item .meta-cat p:hover,
+.desti-item .meta-cat p:focus {
+  color: #2c75ba;
+}
+
+.desti-item .bg-meta-cat {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  text-align: center;
+}
+
+.desti-item .bg-meta-cat>p {
+  background-color: #d51c29;
+  color: #ffffff;
+  padding: 14px 20px;
+  border-radius: 5px;
+}
+
+.desti-item .bg-meta-cat>p:hover,
+.desti-item .bg-meta-cat>p:focus {
+  background-color: rgba(245, 105, 96, 0.85);
+  color: #ffffff;
+}
+
+.desti-item .rating-start span:before {
+  color: #ffffff;
+}
+
+@media screen and (max-width: 991px) {
+  .desti-item .desti-image img {
+    width: 100%;
+  }
+}
+
+.desti-content {
+  padding: 20px;
+}
+
+.desti-content h3 {
+  margin-bottom: 4px;
+}
+
+.desti-content h3 a:hover {
+  color: #d51c29;
+}
+
+.btn-wrap a {
+  margin-top: 50px;
+}
+
+.btn-wrap .book {
+  background-color: #d51c29;
+}
+
+.book i {
+  color: white !important;
+}
+
+@media screen and (max-width: 575px) {
+  .btn-wrap a {
+    margin-top: 20px;
+  }
+
+  .best-section {
+    margin-top: 20px;
+  }
 }

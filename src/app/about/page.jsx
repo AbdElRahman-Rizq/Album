@@ -3,16 +3,14 @@
 import icon15 from "@/assets/images/icon15.png";
 import icon16 from "@/assets/images/icon16.png";
 import icon17 from "@/assets/images/icon17.png";
-import img25 from "@/assets/images/img25.jpg";
-import IneerBanner from "@/components/IneerBanner";
-import SectionHeading from "@/components/SectionHeading";
+import SectionHeading from "@/components/sectionHeading/SectionHeading";
 
 import AboutService from "./components/AboutService";
-import AboutVideo from "./components/AboutVideo";
-import ClientSection from "@/components/ClientSection";
-import CallbackSection from "@/components/CallbackSection";
+import ClientSection from "@/components/ClientSection/ClientSection";
+import CallbackSection from "@/components/CallBackSection/CallbackSection";
 import { useEffect, useState } from "react";
 import { useHomeBlog } from "@/providers/HomeBlogContext";
+import IneerBanner from "@/components/IneerBanner/IneerBanner";
 
 const defaultServices = [
   {
@@ -88,11 +86,11 @@ const About = () => {
                 ))}
               </div>
             </div>
-            <AboutVideo
+            {/* <AboutVideo
               backgroundImage={img25}
               videoId="IUN664s7N-c"
               videoUrl=""
-            />
+            /> */}
           </div>
         </div>
         <ClientSection />

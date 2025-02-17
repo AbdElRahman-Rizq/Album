@@ -6,7 +6,7 @@ const Modal = ({ isAppear, onClose, children }) => {
   if (!isAppear) return null;
 
   return (
-    <div className="modal-overlay">
+    <div className="modal-overlay" style={{ zIndex: "1000" }}>
       <div className="modal-content">
         <button className="modal-close" onClick={onClose}>
           ×

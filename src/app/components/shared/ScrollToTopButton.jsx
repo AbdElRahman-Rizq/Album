@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { FaChevronUp } from "react-icons/fa";
-
+import "./scrollToTop.css"
 const ScrollToTopButton = ({ isLoggedIn, userType }) => {
   const [isVisible, setIsVisible] = useState(false);
 

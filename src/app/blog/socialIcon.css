@@ -1,0 +1,109 @@
+
+.social-icon-wrap {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    -moz-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin: -5px;
+  }
+  
+  .social-icon-wrap .social-icon {
+    padding: 5px;
+    -webkit-flex-grow: 1;
+    -moz-flex-grow: 1;
+    -ms-flex-grow: 1;
+    flex-grow: 1;
+  }
+  
+  .social-icon-wrap .social-icon a {
+    background-color: #d51c29;
+    color: #ffffff;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    -ms-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+  }
+  
+  .social-icon-wrap .social-icon a:hover {
+    -webkit-filter: saturate(1.5) brightness(1.2);
+    -moz-filter: saturate(1.5) brightness(1.2);
+    -ms-filter: saturate(1.5) brightness(1.2);
+    -o-filter: saturate(1.5) brightness(1.2);
+    filter: saturate(1.5) brightness(1.2);
+  }
+  
+  .social-icon-wrap .social-icon [class*="fa-"] {
+    width: 40px;
+    text-align: center;
+  }
+  
+  .social-icon-wrap .social-icon span {
+    background-image: -webkit-gradient(linear,
+        left top,
+        right top,
+        from(rgba(0, 0, 0, 0.12)),
+        to(transparent));
+    background-image: -webkit-linear-gradient(left,
+        rgba(0, 0, 0, 0.12),
+        transparent);
+    background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0.12), transparent);
+    background-image: linear-gradient(90deg, rgba(0, 0, 0, 0.12), transparent);
+    padding: 10px 15px;
+  }
+  
+  .social-icon-wrap .social-facebook a {
+    background-color: #3b5998;
+  }
+  
+  .social-icon-wrap .social-pinterest a {
+    background-color: #bd081c;
+  }
+  
+  .social-icon-wrap .social-whatsapp a {
+    background-color: #25d366;
+  }
+  
+  .social-icon-wrap .social-linkedin a {
+    background-color: #0077b5;
+  }
+  
+  .social-icon-wrap .social-twitter a {
+    background-color: #1da1f2;
+  }
+  
+  .social-icon-wrap .social-google a {
+    background-color: #dd4b39;
+  }
+  
+  .social-icon-wrap .social-tiktok a {
+    background-color: #303030;
+  }
+  
+  .social-icon-wrap .social-instagram a {
+    background-color: #dd4b39;
+  }
+  
+  .social-icon-wrap .social-tripadvisor a {
+    background-color: #39e1a4;
+  }
+  
+  .social-icon-wrap .social-trustpilot a {
+    background-color: #08b87e;
+  }
+  

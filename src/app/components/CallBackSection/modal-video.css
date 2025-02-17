@@ -1,0 +1,66 @@
+
+.modal-video {
+    background-color: rgba(0, 0, 0, 0.9);
+    overflow: hidden;
+  }
+  
+  .modal-video-movie-wrap {
+    position: static;
+  }
+  
+  .modal-video-body {
+    padding: 0 15px;
+  }
+  
+  .modal-video-movie-wrap {
+    border: 5px solid #ffffff;
+  }
+  
+  .modal-video-close-btn {
+    color: #ffffff;
+    font-size: 30px;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(0, 0, 0, 0.3);
+    width: 40px;
+    height: 40px;
+    border-radius: 50% !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    z-index: 1000;
+  }
+  
+  .modal-video-close-btn:hover {
+    background: rgba(0, 0, 0, 0.5);
+  }
+  
+  .modal-video-close-btn:before,
+  .modal-video-close-btn:after {
+    display: none;
+  }
+  
+  .modal-video-close-btn .close {
+    font-size: 24px;
+    color: #ffffff;
+    opacity: 1;
+    line-height: 1;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .modal-video-close-btn:hover,
+  .modal-video-close-btn:focus,
+  .modal-video-close-btn:active {
+    outline: 0;
+  }
+  
+  .modal-video-close-btn:hover:after,
+  .modal-video-close-btn:focus:after,
+  .modal-video-close-btn:active:after {
+    color: #2c75ba;
+  }
+  

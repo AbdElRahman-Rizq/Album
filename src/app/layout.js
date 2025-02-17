@@ -36,11 +36,12 @@ export default async function RootLayout({ children }) {
 
   const langsData = await fetchLangs();
   const langs = Object.keys(langsData)
-    .filter((key) => key !== "_id" && key !== "updated_at")
+    .filter((key) => key !== "_id" && key !== "updated_at" && key != "name")
     .map((name) => ({ name, id: langsData[name] }));
+  console.log("langsssss: ", langs);
 
-  const initialLang = langs[0] || null; // Default to null if no languages
-  const initialBlog = initialLang ? await fetchBlogData(initialLang.name) : {};
+  const initialLang = langs[1] || null; // Default to null if no languages
+  const initialBlog = initialLang ? await fetchBlogData(initialLang.name || "EN") : {};
 
   return (
     <html lang="en">
@@ -60,17 +61,6 @@ export default async function RootLayout({ children }) {
             style={{ display: "none", visibility: "hidden" }}
           ></iframe>
         </noscript>
-        {/* Add script to check localStorage for language */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                const storedLang = localStorage.getItem('language');
-                window.initialLang = storedLang ? JSON.parse(storedLang) : null;
-              })();
-            `
-          }}
-        />
         <QueryProvider>
           <LanguageProvider>
             <HomeBlogProvider

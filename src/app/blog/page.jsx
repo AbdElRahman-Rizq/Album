@@ -8,7 +8,6 @@ import Head from "next/head";
 import { FaFacebookF, FaPinterest, FaWhatsapp, FaInstagram } from "react-icons/fa";
 import WidgetSocial from "./components/widgetSocial";
 import RecentPost from "./components/RecentPost";
-import innerBanner from "@/assets/images/inner-banner.jpg";
 import { useLanguage } from "@/providers/LanguageContext";
 import { api_url } from "@/constants/base_url";
 import Banner from "@/components/shared/banner";
@@ -16,7 +15,9 @@ import Loading from "@/components/shared/Loading/Loading";
 import Empty from "@/components/empty/empty";
 import ArchiveCard from "./components/archiveCard";
 import Pagination from "@/components/pagination/pagination";
-
+import IneerBanner from "@/components/IneerBanner/IneerBanner";
+import "./blog.css";
+import "./socialIcon.css";
 const Blog = () => {
   const { language, setLanguage } = useLanguage();
   const [currentPage, setCurrentPage] = useState(1);
@@ -30,14 +31,29 @@ const Blog = () => {
     const response = await axios.get(`${api_url}blog?page=${page}`, {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${typeof window !== "undefined" ? Cookies.get("album-token") : ""}`,
+        Authorization: `Bearer ${typeof window !== "undefined" ? Cookies.get("album-token") ?? "" : ""}`,
       },
     });
-    return response.data;
+    return response?.data;
   };
 
-  const { data, isLoading } = useQuery({
-    queryKey: ["gestBlog", currentPage, language],
+  const { data: blogLanguageResponse } = useQuery({
+    queryKey: ["getBlogLanguages"],
+    queryFn: async () => {
+      const response = await axios.get(`${api_url}blogLanguage`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${typeof window !== "undefined" ? Cookies.get("album-token") ?? "" : ""}`,
+        },
+      });
+      return response?.data;
+    },
+  });
+
+  const blogLanguageData = blogLanguageResponse?.data ?? [];
+
+  const { data: blogData, isLoading } = useQuery({
+    queryKey: ["getBlog", currentPage, language],
     queryFn: () => fetchBlogs(currentPage),
     onSuccess: (response) => {
       setAllBlogs((prevBlogs) => [...prevBlogs, ...response.data.data]);
@@ -47,7 +63,7 @@ const Blog = () => {
     },
   });
 
-  const totalPages = Math.ceil(data?.data?.total / data?.data?.per_page) || 1;
+  const totalPages = Math.ceil(blogData?.data?.total / blogData?.data?.per_page) || 1;
 
   useEffect(() => {
     const fetchAllPages = async () => {
@@ -64,17 +80,20 @@ const Blog = () => {
     }
   }, [language, totalPages]);
 
-  const filteredBlogs = allBlogs.filter(
-    (blog) => blog[language]
-  );
+  const filteredBlogs = allBlogs.filter((blog) => {
+    const languageContent = blogLanguageData.find((langData) => langData.blogId === blog._id && langData.language === language);
+    return blog[language] && !languageContent?.tour;
+  });
+
+  const totalFilteredPages = Math.ceil(filteredBlogs.length / 15) || 1;
 
   const { data: metaData } = useQuery({
     queryKey: ["blogMeta"],
-    queryFn: () => axios.get(`${api_url}page/blog`)
+    queryFn: () => axios.get(`${api_url}page/blog`),
   });
 
-  const metaTitle = metaData?.data?.title || "Blogs";
-  const metaDescription = metaData?.data?.description || "Explore our latest blogs.";
+  const metaTitle = metaData?.data?.title ?? "Blogs";
+  const metaDescription = metaData?.data?.description ?? "Explore our latest blogs.";
 
   return (
     <>
@@ -83,7 +102,7 @@ const Blog = () => {
         <meta name="description" content={metaDescription} />
       </Head>
       <main id="content" className="site-main">
-        <Banner innerBanner={innerBanner}>Blogs</Banner>
+        <IneerBanner bannerName={"Blogs"}></IneerBanner>
         <div className="archive-section blog-archive">
           <div className="archive-inner">
             <div className="container">
@@ -91,52 +110,88 @@ const Blog = () => {
                 {/* Main Blog Content */}
                 <div className="col-lg-8 primary right-sidebar">
                   {isLoading ? (
-                    <div className="loading">
-                      <Loading />
+                    <div className="loading" style={{ marginTop: "5rem" }}>
+                      <Loading color={"#d51c29"} />
                     </div>
                   ) : (
                     <>
-                      <div className="grid row" style={{ position: "relative" }}>
+                      {filteredBlogs.length > 15 && (
+                        <Pagination
+                          currentPage={currentPage}
+                          totalPages={totalFilteredPages}
+                          onPageChange={handlePageChange}
+                        />
+                      )}
+                      <div className="grid row" style={{ position: "relative", marginTop: "2.5rem" }}>
                         {language === null || language === "all" ? (
                           allBlogs.length === 0 ? (
                             <Empty text="No Blogs yet" />
                           ) : (
-                            allBlogs.map((blog) => (
-                              <div key={blog._id} className="grid-item col-md-6">
-                                <ArchiveCard
-                                  id={blog._id}
-                                  title={blog.title}
-                                  date={blog.created_at}
-                                  imgSrc={blog?.img}
-                                  comments="No Comments"
-                                  language={null}
-                                />
-                              </div>
-                            ))
+                            allBlogs
+                              .filter((blog) => {
+                                const languageContent = blogLanguageData.find((langData) => langData.blogId === blog._id);
+                                return !languageContent?.tour;
+                              })
+                              .map((blog) => (
+                                <div key={blog._id} className="grid-item col-md-6">
+                                  <ArchiveCard
+                                    id={blog._id}
+                                    title={blog.title}
+                                    date={blog.created_at}
+                                    imgSrc={blog?.img}
+                                    comments="No Comments"
+                                    language={null}
+                                  />
+                                </div>
+                              ))
                           )
                         ) : filteredBlogs.length === 0 ? (
                           <Empty text="No Blogs Support this language" />
                         ) : (
-                          filteredBlogs?.map((blog) => (
-                            <div key={blog._id} className="grid-item col-md-6">
-                              <ArchiveCard
-                                slug={blog.slug}
-                                id={blog._id}
-                                title={blog.title}
-                                date={blog.created_at}
-                                comments="No Comments"
-                                language={language}
-                              />
-                            </div>
-                          ))
+                          filteredBlogs.length > 15
+                            ? filteredBlogs
+                              .filter((blog) => blog.slug !== null)
+                              .slice((currentPage - 1) * 15, currentPage * 15)
+                              .map((blog) => {
+                                const languageContent = blogLanguageData?.find(
+                                  (langData) => langData.blogId === blog._id && langData.language === language
+                                );
+                                return (
+                                  <div key={blog._id} className="grid-item col-md-6">
+                                    <ArchiveCard
+                                      slug={blog.slug}
+                                      id={blog._id}
+                                      title={blog.title}
+                                      date={blog.created_at}
+                                      imgSrc={languageContent?.main_card?.image?.[0]}
+                                      comments="No Comments"
+                                      language={language}
+                                    />
+                                  </div>
+                                );
+                              })
+                            : filteredBlogs
+                              .filter((blog) => blog.slug !== null)
+                              .map((blog) => {
+                                const languageContent = blogLanguageData?.find(
+                                  (langData) => langData.blogId === blog._id && langData.language === language
+                                );
+                                return (
+                                  <div key={blog._id} className="grid-item col-md-6">
+                                    <ArchiveCard
+                                      slug={blog.slug}
+                                      id={blog._id}
+                                      title={blog.title}
+                                      date={blog.created_at}
+                                      imgSrc={languageContent?.main_card?.image?.[0]}
+                                      comments="No Comments"
+                                      language={language}
+                                    />
+                                  </div>
+                                );
+                              })
                         )}
                       </div>
-
-                      <Pagination
-                        currentPage={currentPage}
-                        totalPages={totalPages}
-                        onPageChange={handlePageChange}
-                      />
                     </>
                   )}
                 </div>

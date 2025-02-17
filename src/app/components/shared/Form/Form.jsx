@@ -12,7 +12,7 @@ import { api_url } from '../../../constants/base_url';
 import EmptyNoItems from '../EmptyNoItems';
 
 
-const Form = ({ title, className, children, onSubmit }) => {
+const Form = ({ title, className, children, onSubmit, icon }) => {
 
     return (
         <div className={`${style.container} ${className}`}>
@@ -28,99 +28,125 @@ const Form = ({ title, className, children, onSubmit }) => {
 
 const TextController = ({
     placeholder,
-    value,
-    onChange,
-    options,
-    selectPlaceholder,
     register,
     registername,
     validationRules,
     errorMessage,
+    value,
+    onChange,
+    options,
+    selectPlaceholder,
     values,
     setValue,
     type = 'text',
     selectedCode,
+    icon
 }) => {
     return (
         <div className={style.inputContainer}>
             {errorMessage && <span className={style.helperText}>{errorMessage}</span>}
-            <div className={options && style.inputWithOptions}>
-                {options && (
-                    <SelectController
-                        options={options}
-                        placeholder={selectPlaceholder}
-                        name="name-title"
-                        values={values}
-                        setValue={setValue}
+            {options ? (
+                <div className={style.inputWithOptions}>
+                    <select
+                        className={style.countryCodeSelect}
                         onChange={(e) => {
                             const selectedValue = e.target.value;
-                            setValue(registername, selectedValue);
+                            setValue('code', selectedValue);
                             onChange && onChange(e);
                         }}
+                    >
+                        <option value="" disabled>
+                            {selectPlaceholder}
+                        </option>
+                        {options.map((option, index) => {
+                            if (option) {
+                                const parts = option.split(" (");
+                                if (parts.length === 2) {
+                                    const code = parts[1].replace(")", "");
+                                    return (
+                                        <option key={index} value={code}>
+                                            {code}
+                                        </option>
+                                    );
+                                }
+                            }
+                            return null;
+                        })}
+                    </select>
+                    <div className={style.phoneInputWrapper}>
+                        <div className={style.inputWithIcon}>
+                            {icon && <span className={style.inputIcon}>{icon}</span>}
+                            <input
+                                {...(register && register(registername, validationRules))}
+                                type={type}
+                                value={selectedCode || value}
+                                placeholder={placeholder}
+                                onChange={onChange}
+                                className={style.phoneInput}
+                            />
+                        </div>
+                    </div>
+                </div>
+            ) : (
+                <div className={style.inputWithIcon}>
+                    {icon && <span className={style.inputIcon}>{icon}</span>}
+                    <input
+                        {...(register && register(registername, validationRules))}
+                        type={type}
+                        value={value}
+                        placeholder={placeholder}
+                        onChange={onChange}
                     />
-                )}
-                <input
-                    {...(register && register(registername, validationRules))}
-                    type={type}
-                    value={selectedCode || value}
-                    placeholder={placeholder}
-                    onChange={onChange}
-                />
-            </div>
+                </div>
+            )}
         </div>
     );
 };
 
 const SelectController = ({
+    placeholder,
     options,
     name,
-    placeholder,
     value,
     onChange,
-    values,
     setValue,
     registername,
     validationRules,
     errorMessage,
     register,
+    icon
 }) => {
     return (
         <div className={style.inputContainer}>
             {errorMessage && <span className={style.helperText}>{errorMessage}</span>}
-            <select
-                {...(register && register(registername, validationRules))}
-                name={name}
-                value={value}
-                onChange={(e) => {
-                    const selectedValue = e.target.value;
-                    onChange && onChange(e);
-                    setValue(registername, selectedValue);
-                }}
-            >
-                <option value="" disabled>
-                    {placeholder}
-                </option>
-                {options.map((option, index) => {
-                    if (option) {
-                        const parts = option.split(" (");
-                        if (parts.length === 2) {
-                            const code = parts[1].replace(")", "");
-                            return (
-                                <option key={index} value={code}>
-                                    {code}
-                                </option>
-                            );
-                        }
-                    }
-                    return null;
-                })}
-            </select>
+            <div className={style.inputWithIcon}>
+                {icon && <span className={style.inputIcon}>{icon}</span>}
+                <select
+                    {...(register && register(registername, validationRules))}
+                    name={name}
+                    value={value}
+                    onChange={(e) => {
+                        const selectedValue = e.target.value;
+                        onChange && onChange(e);
+                        setValue && setValue(registername, selectedValue);
+                    }}
+                >
+                    <option value="" disabled>
+                        {placeholder}
+                    </option>
+                    {options.map((option, index) => (
+                        <option key={index} value={option}>
+                            {option}
+                        </option>
+                    ))}
+                </select>
+            </div>
         </div>
     );
 };
 
 
-const AddListController = ({ placeholder, value = [], onChange }) => {
+const AddListController = ({ placeholder, value = [], onChange, icon }) => {
     const [inputValue, setInputValue] = useState('');
 
     const handleAddItem = () => {
@@ -140,7 +166,10 @@ const AddListController = ({ placeholder, value = [], onChange }) => {
             <div className={style.inputContainer}>
                 <div className={style.listContainer}>
                     <div>
-                        <input type="text" placeholder={placeholder} value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
+                        <div className={style.inputWithIcon}>
+                            {icon && <span className={style.inputIcon}>{icon}</span>}
+                            <input type="text" placeholder={placeholder} value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
+                        </div>
                         <button type='button' onClick={handleAddItem} className='button-primary'>Add</button>
                     </div>
                     {value.length ?
@@ -166,6 +195,7 @@ const DragAndDropController = ({
     registername,
     setValue,
     errors,
+    icon
 }) => {
     const [image, setImage] = useState(initialValue || null);
     const [error, setError] = useState(null);
@@ -251,6 +281,7 @@ const DragAndDropController = ({
                         borderColor: error || (errors[registername] && COLORS.DANGER),
                     }}
                 >
+                    {icon && <span className={style.inputIcon}>{icon}</span>}
                     <SlCloudUpload />
                     <p style={{ color: COLORS.DARK_GRAY }}>{"Drag and Drop image"}</p>
                     <p style={{ color: COLORS.DARK_GRAY }}>{"Or"}</p>
@@ -277,19 +308,32 @@ const DragAndDropController = ({
 
 
 
-const DateTimeController = ({ label, register, registername, defaultValue }) => {
+const DateTimeController = ({ label, register, registername, defaultValue, icon }) => {
+    // Calculate the minimum date (3 days from now)
+    const minDate = (() => {
+        const date = new Date();
+        date.setDate(date.getDate() + 4);
+        return date.toISOString().split('T')[0];
+    })();
+
     return (
-        <div className={style.inputContainer}>
-            <div>
-                <label htmlFor={label}>{label}</label>
-                <input className="input-date-picker" type="date" name="s" id={label} {...register(registername)} defaultValue={defaultValue} />
+        <div className={style.dateInputWrapper}>
+            <label>{label}</label>
+            <div className={style.inputWithIcon}>
+                {icon && <span className={style.inputIcon}>{icon}</span>}
+                <input
+                    type="date"
+                    {...register(registername)}
+                    defaultValue={defaultValue}
+                    min={minDate}
+                />
             </div>
         </div>
     );
 };
 
 
-const CounterController = ({ label, helperText, initialValue, minValue, maxValue, setValue, registername }) => {
+const CounterController = ({ label, helperText, initialValue, minValue, maxValue, setValue, registername, icon }) => {
     const [counter, setCounter] = useState(initialValue);
 
     useEffect(() => {
@@ -321,6 +365,7 @@ const CounterController = ({ label, helperText, initialValue, minValue, maxValue
                     <button type='button' className="increase" onClick={increase} disabled={counter === maxValue} style={{ cursor: counter === maxValue && "not-allowed" }}>
                         <FaPlus />
                     </button>
+                    {icon && <span className={style.inputIcon}>{icon}</span>}
                 </div>
             </div>
         </div>
@@ -328,11 +373,12 @@ const CounterController = ({ label, helperText, initialValue, minValue, maxValue
 };
 
 
-const TextareaController = ({ placeholder, value, onChange, register, registername, validationRules, errorMessage }) => {
+const TextareaController = ({ placeholder, value, onChange, register, registername, validationRules, errorMessage, icon }) => {
     return (
         <div className={style.inputContainer}>
             {errorMessage && <span className={style.helperText}>{errorMessage}</span>}
-            <div>
+            <div className={style.inputWithIcon}>
+                {icon && <span className={style.inputIcon}>{icon}</span>}
                 <textarea
                     {...register(registername, validationRules)}
                     value={value}
@@ -344,7 +390,7 @@ const TextareaController = ({ placeholder, value, onChange, register, registerna
     );
 };
 
-const ButtonController = ({ children, type = "button", isLoading, onClick, main, sub, red, disabled }) => {
+const ButtonController = ({ children, type = "button", isLoading, onClick, main, sub, red, disabled, icon }) => {
     return (
         <div className={style.inputContainer} onClick={onClick}>
             <button
@@ -352,6 +398,7 @@ const ButtonController = ({ children, type = "button", isLoading, onClick, main,
                 type={type}
                 style={main ? { backgroundColor: red ? COLORS.MAIN_COLOR.MAIN : COLORS.SECOND_COLOR.MAIN } : sub && { backgroundColor: "transparent", color: red ? COLORS.MAIN_COLOR.MAIN : COLORS.SECOND_COLOR.MAIN, border: `1px solid ${red ? COLORS.MAIN_COLOR.MAIN : COLORS.SECOND_COLOR.MAIN}` }}
             >
+                {icon && <span className={style.inputIcon}>{icon}</span>}
                 {isLoading ? <Loading /> : children}
             </button>
         </div>

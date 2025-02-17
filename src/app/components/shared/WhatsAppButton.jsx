@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import FaWhatsapp from "@/assets/images/whatsapp-icon.png";
 import Image from "next/image";
-
+import "./whatsAppButton.css";
 const WhatsAppButton = () => {
   const [showButton, setShowButton] = useState(false);
 
@@ -35,7 +35,7 @@ const WhatsAppButton = () => {
         target="_blank"
         rel="noopener noreferrer"
       >
-        <Image src={FaWhatsapp} alt="whatsapp" width={80} height={100} />
+        <Image src={FaWhatsapp} alt="whatsapp" width={70} height={70} />
       </a>
     )
   );

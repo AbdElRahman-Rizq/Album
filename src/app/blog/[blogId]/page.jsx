@@ -22,6 +22,7 @@ import {
   FaTripadvisor,
 } from "react-icons/fa";
 import { SiTrustpilot } from "react-icons/si";
+import "../blog.css"
 
 const BlogSingle = () => {
   const router = useRouter();

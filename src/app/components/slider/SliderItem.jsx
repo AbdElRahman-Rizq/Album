@@ -5,7 +5,7 @@ const SliderItem = ({ backgroundImage }) => {
   return (
     <div
       className="slider-item"
-      style={{ position: "relative", width: "100%", height: "100vh" }}
+      style={{ position: "relative", width: "100%", height: "80vh" }}
     >
       <div
         style={{

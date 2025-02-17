@@ -21,7 +21,7 @@ export const fetchLangs = async () => {
 export const fetchBlogData = async (langName) => {
   try {
     console.log("lang: ", langName);
-    const response = await axios.get(`${api_url}home/${langName}`, {
+    const response = await axios.get(`${api_url}home/${langName || "EN"}`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${Cookies.get("album-token")}`,
